@@ -4,6 +4,7 @@ import SignInView from "./views/SignInView";
 import AddRekemView from "./views/AddRekemView";
 import DashboardView from "./views/DashboardView";
 import mappings from "./mappings";
+import SiteContextProvider from "./contexts/SiteContext";
 /*
 <Link to="/products">Click me to go to</Link>
 
@@ -15,7 +16,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <SiteContextProvider>
+      <RouterProvider router={router}/>
+    </SiteContextProvider>
+  );
 };
 
 export default App;
