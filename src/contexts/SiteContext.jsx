@@ -1,10 +1,10 @@
 import {userLogIn, userLogOut} from '../api/database';
 import { createContext, useEffect, useReducer } from 'react';
+import {retrieveContextDataFromStorage} from '../helpers/contextHelpers'
 import mappings from '../mappings';
 
 
 //// REDUCER DEFAULTS /////
-
 const defaultUserData = {
     gdud: '',
     isManager: false,
@@ -16,24 +16,18 @@ const defaultSessionData = {
     sessionExpiryDate: null,
 };
 
-const retrieveDataFromStorage = () => {
-    const savedSessionData = localStorage.getItem('sessionData');
-    const sessionData = savedSessionData
-      ? JSON.parse(savedSessionData)
-      : defaultSessionData;
-  
-    const parsedUserData = JSON.parse(localStorage.getItem('userData'));
-    const darkmodeState = localStorage.getItem(mappings.darkMode) === '1';
-  
-    return { sessionData, userData: parsedUserData, isInDarkMode: darkmodeState };
-  };
-
+/*
+NOTE: We don't save or retireve any data from the database until we are sure that the user is authenticated. 
+Because we are not sure that the session is still valid and user is authenticated (as the user can change the cookies locally),
+we wont include any sensitive information like rekems list. For that the user will have to request for it,
+and if the user is not authenticated in the server then we will reset the cookies state.
+*/
 const reducerInitialData = {
-    ...retrieveDataFromStorage(),
+    ...retrieveContextDataFromStorage(defaultUserData, defaultSessionData),
     rekemsList: [],
 };
 
-
+//// REDUCER FUNCTION /////
 const reducer = (state, action) => {
     switch (action.type) {
         case mappings.setUserData:
@@ -74,7 +68,6 @@ const reducer = (state, action) => {
 
 
 //// SITE CONTEXT ////
-
 export const SiteContext = createContext({
     ...reducerInitialData,
     toggleDarkmode: async () => {},
@@ -101,7 +94,6 @@ const SiteContextProvider = (props) => {
     */
 
     const onLogInHandler = async (pernum) => {
-
         const result = await userLogIn(pernum);
         if (result.error)
             throw new Error(result.error_message);
@@ -120,9 +112,8 @@ const SiteContextProvider = (props) => {
 
         dispatch({type: mappings.setUserData, value: userData});
         dispatch({type: mappings.setSessionData, value: sessionData});
-
-        localStorage.setItem('sessionData', JSON.stringify(sessionData));
-        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.setItem(mappings.sessionData, JSON.stringify(sessionData));
+        localStorage.setItem(mappings.userData, JSON.stringify(userData));
     
     };
     
@@ -138,6 +129,8 @@ const SiteContextProvider = (props) => {
         dispatch({type: mappings.setRekemList, value: []});
         dispatch({type: mappings.setUserData, value: defaultUserData});
         dispatch({type: mappings.setSessionData, value: defaultSessionData});
+        localStorage.removeItem(mappings.sessionData);
+        localStorage.removeItem(mappings.userData);
         
         };
 
@@ -146,7 +139,6 @@ const SiteContextProvider = (props) => {
     */
     const toggleDarkmode = async () => {
         dispatch({type: mappings.toggleDarkMode});
-    
     };
     
     const getRekemList = async () => {
@@ -157,16 +149,15 @@ const SiteContextProvider = (props) => {
     
     };
     
-    const siteContextMappings = {
-        ...state,
-        toggleDarkmode,
-        onLogOutHandler,
-        onLogInHandler,
-        addRekemHandler,
-    };
 
     return (
-        <SiteContext.Provider value={siteContextMappings}>
+        <SiteContext.Provider value={{
+            ...state,
+            toggleDarkmode,
+            onLogOutHandler,
+            onLogInHandler,
+            addRekemHandler,
+        }}>
             {props.children}
         </SiteContext.Provider>
     )
