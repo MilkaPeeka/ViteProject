@@ -1,30 +1,35 @@
 import RekemQueryResult from "../components/AddRekem/RekemQueryResult";
 import RekemForm from "../components/AddRekem/RekemForm";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import {SiteContext} from "../contexts/SiteContext"
 import { Box } from "@mui/material";
+import { reduceRekemListIntoData } from "../helpers/RekemQueryHelpers";
 const AddRekemView = () => {
-
     const [newRekemConfirmed, setNewRekemConfirmation] = useState(false);
     const [currentMakat, setCurrentMakat] = useState('');
-
+    const [rekemList, setRekemList] = useState([]);
     const ctx = useContext(SiteContext);
 
-    let queriedRekem;
+    useEffect(() => {
+        console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
+        ctx.getRekemList()
+        .then(result => {
+            setRekemList(result);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
 
-    ctx.getRekemList()
-    .then(() => {
-        queriedRekem = 
-    });
 
     const RekemQueryData = {
-        ...searchRekem(currentMakat),
-        newRekemConfirmed,
-        setNewRekemConfirmation,
-        currentMakat,
-        setCurrentMakat
-
-    }
+        ...reduceRekemListIntoData(rekemList, currentMakat),
+            gdud: ctx.userData.gdud,
+            setNewRekemConfirmation,
+            newRekemConfirmed,
+            currentMakat,
+            setCurrentMakat
+    };
 
     const boxSX = {
         display: 'flex',

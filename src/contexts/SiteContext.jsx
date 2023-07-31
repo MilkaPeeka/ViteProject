@@ -22,11 +22,7 @@ Because we are not sure that the session is still valid and user is authenticate
 we wont include any sensitive information like rekems list. For that the user will have to request for it,
 and if the user is not authenticated in the server then we will reset the cookies state.
 */
-const reducerInitialData = {
-    ...retrieveContextDataFromStorage(defaultUserData, defaultSessionData),
-    wereRekemsLoaded: false,
-    rekemsList: [],
-};
+const reducerInitialData = retrieveContextDataFromStorage(defaultUserData, defaultSessionData);
 
 //// REDUCER FUNCTION /////
 const reducer = (state, action) => {
@@ -47,13 +43,6 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 sessionData: action.value,
-            }
-
-        case mappings.setRekemList:
-            return {
-                ...state,
-                rekemsList: action.value,
-                wereRekemsLoaded: true
             }
 
         case mappings.setDarkMode:
@@ -139,13 +128,14 @@ const SiteContextProvider = (props) => {
         dispatch({type: mappings.toggleDarkMode});
     };
     
+    // does it belong here? thinking of moving it into helpers or just use API directly, 
+    // leaving it for now for cohesion
     const getRekemList = async () => {
         const result = await getRekemsByGdud();
         if (result.error)
             throw new Error(result.data.error_message);
-
-        dispatch({type: mappings.setRekemList, value: result});
-        
+            
+        return result.results;
     };
     
     const addRekemHandler = async (rekemData) => {

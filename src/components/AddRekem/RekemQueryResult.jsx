@@ -1,8 +1,9 @@
 /*
 props = {
     isRekemFound: boolean,
-    gdud: string,
     rekemData: JSON (optional),
+    
+    gdud: string,
 
     setNewRekemConfirmation: function,
     newRekemConfirmed: boolean

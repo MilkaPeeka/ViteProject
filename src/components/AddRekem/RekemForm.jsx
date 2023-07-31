@@ -36,17 +36,17 @@ const RekemForm = (props) => {
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
     };
 
-    const isCheckboxConfirmationNeeded = props.isRekemFound ? false : !props.newModelCheckValue;
+    const isCheckboxConfirmationNeeded = props.isRekemFound ? false : !props.newRekemConfirmed;
     return (
         <Card onSubmit={handleSubmit(onSubmit)} component='form' sx={formSX}>
             <FormGroup mb={3}>
                 <FormLabel mb={1}>מספר גדוד</FormLabel>
-                <TextField variant="outlined" disabled value={props.rekemData.gdud}/>
+                <TextField variant="outlined" disabled value={props.gdud}/>
             </FormGroup>
 
             <FormGroup mb={3}>
                 <FormLabel mb={1}>הכנס מקט רקמ</FormLabel>
-                <TextField variant="outlined" label="מקט רקמ" {...register("makat", {required: "שדה זה לא יכול להישאר ריק!", pattern: {value:  /^\d+$/, message: "מקט חייב להכיל רק ספרות"}, onChange: (e) => console.log(e.target.value)})} error={!!errors.makat} />
+                <TextField variant="outlined" label="מקט רקמ" {...register("makat", {required: "שדה זה לא יכול להישאר ריק!", pattern: {value:  /^\d+$/, message: "מקט חייב להכיל רק ספרות"}, onChange: (e) => props.setCurrentMakat(e.target.value)})} error={!!errors.makat} />
                 {!!errors.makat &&<FormLabel error mb={1}>{errors.makat?.message}</FormLabel>}
             </FormGroup>
 

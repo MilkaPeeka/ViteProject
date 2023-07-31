@@ -17,7 +17,6 @@ API_add_rekem: '/api/rekems/add/', // POST
 setUserData: "SETUSERDATA",
 setSessionData: "SETSESSIONDATA",
 toggleDarkMode: "TOGGLEDARKMODE",
-setRekemList: "SETREKEMLIST",
 setDarkMode: "SETDARKMODE",
 
 ////////////////////    LOCAL STORAGE   ////////////////////
