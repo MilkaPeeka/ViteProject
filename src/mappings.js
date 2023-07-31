@@ -1,9 +1,9 @@
 export default {
 ////////////////////    ROUTER PATHS    ////////////////////
-addRekemPath: 'addRekem/',
-dashboardPath: 'dashboard/',
-signInPath: 'signIn/',
-devPath: 'dev/',
+addRekemPath: '/addRekem',
+dashboardPath: '/dashboard',
+signInPath: '/signIn/',
+devPath: '/dev',
 
 ////////////////////    API PATHS   ////////////////////
 API_login: '/api/login', // POST

@@ -11,7 +11,7 @@ const SignInView = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (ctx.sessionData.isLoggedIn)
-            return navigate('/' + mappings.dashboardPath);
+            return navigate(mappings.dashboardPath);
     }, [ctx.sessionData.isLoggedIn]);
 
     const onSubmitHandler = (submittedForm) => {

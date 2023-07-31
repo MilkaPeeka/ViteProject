@@ -15,7 +15,7 @@ const AddRekemView = () => {
 
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
-            return navigate('/' + mappings.signInPath);
+            return navigate(mappings.signInPath);
 
         console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
         ctx.getRekemList()

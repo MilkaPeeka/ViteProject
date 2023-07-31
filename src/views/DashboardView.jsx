@@ -9,7 +9,7 @@ const DashboardView = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
-            return navigate('/' + mappings.signInPath);
+            return navigate(mappings.signInPath);
 
     }, [ctx.sessionData.isLoggedIn]);
     
