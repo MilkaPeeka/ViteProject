@@ -30,9 +30,9 @@ const Navbar = () => {
 
     const LeftButtonGroup = (
         <Box display="flex" flexDirection="row">
-        {isLoadingLoggingOut && <CircularProgress color="success"  sx={{marginRight: 9}}/>}
-        {!isLoadingLoggingOut && ctx.sessionData.isLoggedIn && <Button variant="outlined" color="success" onClick={onLogOut} sx={{marginRight: 6}}>התנתקות</Button>}
-        {!ctx.sessionData.isLoggedIn && <Button component={Link} to={'/' + mappings.signInPath} variant="outlined" color="warning" sx={{marginRight: 6}}>התחברות</Button>}
+        {isLoadingLoggingOut && <CircularProgress color="warning" sx={{marginRight: 9}}/>}
+        {!isLoadingLoggingOut && ctx.sessionData.isLoggedIn && <Button variant="outlined" color="warning" onClick={onLogOut} sx={{marginRight: 6}}>התנתקות</Button>}
+        {!ctx.sessionData.isLoggedIn && <Button component={Link} to={'/' + mappings.signInPath} variant="outlined" color="success" sx={{marginRight: 6}}>התחברות</Button>}
         <ToggleButtonGroup value={alignment} exclusive onChange={handleChange} aria-label="set dark mode">
           <ToggleButton value="sun">
             <WbSunnyIcon />

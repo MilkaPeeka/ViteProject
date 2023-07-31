@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { SiteContext } from "../contexts/SiteContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom/";
+import mappings from "../mappings";
+
 const DashboardView = () => {
     const ctx = useContext(SiteContext);
     const navigate = useNavigate();

@@ -82,7 +82,7 @@ const SiteContextProvider = (props) => {
     const onLogInHandler = async (pernum) => {
         const result = await userLogIn(pernum);
         if (result.error)
-            throw new Error(result.data.error_message);
+            throw new Error(result.error_message);
         
         const userData = {
             gdud: result.user.gdud,
@@ -109,7 +109,7 @@ const SiteContextProvider = (props) => {
     const onLogOutHandler = async () => {
         const result = await userLogOut();
         if (result.error)
-            throw new Error(result.data.error_message);
+            throw new Error(result.error_message);
 
         dispatch({type: mappings.setRekemList, value: []});
         dispatch({type: mappings.setUserData, value: defaultUserData});
@@ -133,7 +133,7 @@ const SiteContextProvider = (props) => {
     const getRekemList = async () => {
         const result = await getRekemsByGdud();
         if (result.error)
-            throw new Error(result.data.error_message);
+            throw new Error(result.error_message);
             
         return result.results;
     };
@@ -141,7 +141,7 @@ const SiteContextProvider = (props) => {
     const addRekemHandler = async (rekemData) => {
         const result = await addRekemToGdud(rekemData);
         if (result.error)
-            throw new Error(result.data.error_message);
+            throw new Error(result.error_message);
     };
     
 

@@ -47,13 +47,13 @@ const RekemForm = (props) => {
             <FormGroup mb={3}>
                 <FormLabel mb={1}>הכנס מקט רקמ</FormLabel>
                 <TextField variant="outlined" label="מקט רקמ" {...register("makat", {required: "שדה זה לא יכול להישאר ריק!", pattern: {value:  /^\d+$/, message: "מקט חייב להכיל רק ספרות"}, onChange: (e) => props.setCurrentMakat(e.target.value)})} error={!!errors.makat} />
-                {!!errors.makat &&<FormLabel error mb={1}>{errors.makat?.message}</FormLabel>}
+                {!!errors.makat &&<FormLabel error sx={{paddingTop: 1}}>{errors.makat?.message}</FormLabel>}
             </FormGroup>
 
             <FormGroup mb={3}>
                 <FormLabel mb={1}>הכנס מספר ייחודי של רקמ</FormLabel>
                 <TextField variant="outlined" label="מספר ייחודי" {...register("serialNum", {required: "שדה זה לא יכול להישאר ריק!", pattern: {value:  /^\d+$/, message: "מספר ייחודי חייב להכיל רק ספרות "}})} error={!!errors.serialNum} />
-                {!!errors.serialNum && <FormLabel error mb={1}>{errors.serialNum?.message}</FormLabel>}
+                {!!errors.serialNum && <FormLabel error sx={{paddingTop: 1}}>{errors.serialNum?.message}</FormLabel>}
             </FormGroup>
 
             <FormGroup>
