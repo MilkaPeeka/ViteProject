@@ -2,9 +2,7 @@ import { useContext } from "react";
 import { SiteContext } from "../contexts/SiteContext";
 
 const SignInView = () => {
-    const ctx = useContext(SiteContext);
-    console.log(ctx.sessionData.isLoggedIn);
-    return (<button onClick={ctx.onLogInHandler.bind(null, 2979)}>Click me</button>);
+    return <h1>log in view</h1>
 };
 
 export default SignInView;

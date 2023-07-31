@@ -76,6 +76,7 @@ export const SiteContext = createContext({
     onLogOutHandler: async () => {},
     onLogInHandler: async (pernum) => {},
     addRekemHandler: async (rekemData) => {}, 
+    getRekemList: async () => {}
 });
 
 
@@ -91,7 +92,7 @@ const SiteContextProvider = (props) => {
 
     const onLogInHandler = async (pernum) => {
         const result = await userLogIn(pernum);
-        if (result.data.error)
+        if (result.error)
             throw new Error(result.data.error_message);
         
         const userData = {
@@ -118,7 +119,7 @@ const SiteContextProvider = (props) => {
     */
     const onLogOutHandler = async () => {
         const result = await userLogOut();
-        if (result.data.error)
+        if (result.error)
             throw new Error(result.data.error_message);
 
         dispatch({type: mappings.setRekemList, value: []});
@@ -140,16 +141,16 @@ const SiteContextProvider = (props) => {
     
     const getRekemList = async () => {
         const result = await getRekemsByGdud();
-        if (result.data.error)
+        if (result.error)
             throw new Error(result.data.error_message);
 
-        dispatch({type: mappings.setRekemList, value: result.data});
+        dispatch({type: mappings.setRekemList, value: result});
         
     };
     
     const addRekemHandler = async (rekemData) => {
         const result = await addRekemToGdud(rekemData);
-        if (result.data.error)
+        if (result.error)
             throw new Error(result.data.error_message);
     };
     
@@ -161,6 +162,7 @@ const SiteContextProvider = (props) => {
             onLogOutHandler,
             onLogInHandler,
             addRekemHandler,
+            getRekemList
         }}>
             {props.children}
         </SiteContext.Provider>

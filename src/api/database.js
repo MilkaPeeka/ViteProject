@@ -20,12 +20,10 @@ export const userLogIn = async (pernum) => {
     }
     catch (err) {
         return {
-            data: {
                 error: true,
                 error_message: err.message
-            }
-        };
-    }
+            };
+        }
 };
 
 /*
@@ -54,14 +52,12 @@ export const userLogOut = async () => {
 export const getRekemsByGdud = async () => {
     try {
         const response = await axios.get(mappings.API_get_rekems_by_gdud, {withCredentials: true});
-        return response;
+        return response.data;
     }
     catch (err) {
         return {
-            data: {
-                error: true,
-                error_message: err.message
-            }
+            error: true,
+            error_message: err.message
         };
     }
 };
@@ -73,16 +69,14 @@ export const getRekemsByGdud = async () => {
 
 export const addRekemToGdud = async (rekemData) => {
     try {
-        const result = await axios.post(mappings.API_add_rekem, {rekemData}, {withCredentials: true});
-        return result;
+        const response = await axios.post(mappings.API_add_rekem, {rekemData}, {withCredentials: true});
+        return response.data;
     }
 
     catch (err) {
         return {
-            data: {
-                error: true,
-                error_message: err.message
-            }
+            error: true,
+            error_message: err.message
         };
     }
 };

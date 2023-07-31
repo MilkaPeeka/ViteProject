@@ -3,6 +3,7 @@ export default {
 addRekemPath: 'addRekem/',
 dashboardPath: 'dashboard/',
 signInPath: 'signIn/',
+devPath: 'dev/',
 
 ////////////////////    API PATHS   ////////////////////
 API_login: '/api/login', // POST
@@ -18,7 +19,6 @@ setSessionData: "SETSESSIONDATA",
 toggleDarkMode: "TOGGLEDARKMODE",
 setRekemList: "SETREKEMLIST",
 setDarkMode: "SETDARKMODE",
-
 
 ////////////////////    LOCAL STORAGE   ////////////////////
 darkMode: "DARKMODE",

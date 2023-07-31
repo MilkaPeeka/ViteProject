@@ -8,6 +8,7 @@ import Root from "./views/Root";
 import mappings from "./mappings";
 import SiteContextProvider from "./contexts/SiteContext";
 import DefaultThemeWrapper from "./themes/DefaultThemeWrapper";
+import DevView from "./views/DevView";
 /*
 <Link to="/products">Click me to go to</Link>
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     {path: '/' + mappings.addRekemPath, element: <AddRekemView />},
     {path: '/' + mappings.signInPath, element: <SignInView />},
     {path: '/' + mappings.dashboardPath, element: <DashboardView />},
+    {path: '/' + mappings.devPath, element: <DevView />},
   ]
   }]);
 

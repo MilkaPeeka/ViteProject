@@ -17,8 +17,14 @@ const DefaultThemeWrapper = (props) => {
         const theme = createTheme({
             direction: 'rtl',
             palette: {
-                mode: ctx.isInDarkMode ? 'dark' : 'light'
-            }
+                mode: ctx.isInDarkMode ? 'dark' : 'light',
+                primary: {
+                    main: '#4527a0',
+                  },
+                  secondary: {
+                    main: '#6200ea',
+                  }
+                }
           });
           const cacheRtl = createCache({
             key: 'muirtl',
