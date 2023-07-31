@@ -1,4 +1,4 @@
-import { useContext, Memo } from "react";
+import { useContext } from "react";
 import { SiteContext } from "../contexts/SiteContext";
 
 const SignInView = () => {

@@ -1,5 +1,5 @@
-import {userLogIn, userLogOut} from '../api/database';
-import { createContext, useEffect, useReducer } from 'react';
+import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud} from '../api/database';
+import { createContext, useReducer } from 'react';
 import {retrieveContextDataFromStorage} from '../helpers/contextHelpers'
 import mappings from '../mappings';
 
@@ -24,6 +24,7 @@ and if the user is not authenticated in the server then we will reset the cookie
 */
 const reducerInitialData = {
     ...retrieveContextDataFromStorage(defaultUserData, defaultSessionData),
+    wereRekemsLoaded: false,
     rekemsList: [],
 };
 
@@ -51,7 +52,8 @@ const reducer = (state, action) => {
         case mappings.setRekemList:
             return {
                 ...state,
-                rekemsList: action.value
+                rekemsList: action.value,
+                wereRekemsLoaded: true
             }
 
         case mappings.setDarkMode:
@@ -81,12 +83,6 @@ export const SiteContext = createContext({
 const SiteContextProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, reducerInitialData);
 
-    //////////// HANDLE DARK MODE CONTEXT ////////////
-    useEffect(() => {
-        // Save the dark mode state in localStorage
-        localStorage.setItem(mappings.darkMode, state.isInDarkMode ? '1' : '0');
-      }, [state.isInDarkMode]);
-    
     /*
     Recieves as an argument: pernum (string)
     sends a request to the server to authenticate using the pernum
@@ -95,9 +91,8 @@ const SiteContextProvider = (props) => {
 
     const onLogInHandler = async (pernum) => {
         const result = await userLogIn(pernum);
-        if (result.error)
-            throw new Error(result.error_message);
-        
+        if (result.data.error)
+            throw new Error(result.data.error_message);
         
         const userData = {
             gdud: result.user.gdud,
@@ -123,8 +118,8 @@ const SiteContextProvider = (props) => {
     */
     const onLogOutHandler = async () => {
         const result = await userLogOut();
-        if (result.error)
-            throw new Error(result.error_message);
+        if (result.data.error)
+            throw new Error(result.data.error_message);
 
         dispatch({type: mappings.setRekemList, value: []});
         dispatch({type: mappings.setUserData, value: defaultUserData});
@@ -138,15 +133,24 @@ const SiteContextProvider = (props) => {
     toggles dark mode state in the website.
     */
     const toggleDarkmode = async () => {
+        // !state.isInDarkMode because we want to change the value
+        localStorage.setItem(mappings.darkMode, !state.isInDarkMode ? '1' : '0'); 
         dispatch({type: mappings.toggleDarkMode});
     };
     
     const getRekemList = async () => {
-    
+        const result = await getRekemsByGdud();
+        if (result.data.error)
+            throw new Error(result.data.error_message);
+
+        dispatch({type: mappings.setRekemList, value: result.data});
+        
     };
     
     const addRekemHandler = async (rekemData) => {
-    
+        const result = await addRekemToGdud(rekemData);
+        if (result.data.error)
+            throw new Error(result.data.error_message);
     };
     
 

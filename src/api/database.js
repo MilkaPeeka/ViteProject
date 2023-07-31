@@ -7,16 +7,10 @@ for example "auth.js", "userRetrival.js" etc
 import axios from 'axios';
 import mappings from '../mappings';
 
-/*
-Recieves as an argument: pernum (string)
-data sent to the server: {pernum: pernum}
-data recieved back: 
-    {error: boolean,
-    error_message: string (optional), 
-    user: userObject (optional),
-    sessionExpiry: Date (optional)}
-*/
 
+/*
+    Creates a session with the server based on pernum
+ */
 export const userLogIn = async (pernum) => {
     try {
         const response = await axios.post(mappings.API_login, {pernum});
@@ -26,18 +20,69 @@ export const userLogIn = async (pernum) => {
     }
     catch (err) {
         return {
-            error: true,
-            error_message: err.message
+            data: {
+                error: true,
+                error_message: err.message
+            }
         };
     }
 };
 
+/*
+    Destroys session in backend
+*/
 export const userLogOut = async () => {
-    
+    try {
+        const response = await axios.get(mappings.API_logout, {withCredentials: true});
+        return response.data;
+    }
+
+    catch (err) {
+        return {
+            data: {
+                error: true,
+                error_message: err.message
+            }
+        };
+    }
 };
 
-export const retrieveRekemsByGdud = async (rekemMakat) => {
 
+/*
+    Returns a list of rekems of user's gdud.
+*/
+export const getRekemsByGdud = async () => {
+    try {
+        const response = await axios.get(mappings.API_get_rekems_by_gdud, {withCredentials: true});
+        return response;
+    }
+    catch (err) {
+        return {
+            data: {
+                error: true,
+                error_message: err.message
+            }
+        };
+    }
 };
 
 
+/*
+    Adds a rekem to user's gdud.
+*/
+
+export const addRekemToGdud = async (rekemData) => {
+    try {
+        const result = await axios.post(mappings.API_add_rekem, {rekemData}, {withCredentials: true});
+        return result;
+    }
+
+    catch (err) {
+        return {
+            data: {
+                error: true,
+                error_message: err.message
+            }
+        };
+    }
+};

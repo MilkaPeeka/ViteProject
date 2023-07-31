@@ -7,6 +7,7 @@ import ErrorView from "./views/ErrorView";
 import Root from "./views/Root";
 import mappings from "./mappings";
 import SiteContextProvider from "./contexts/SiteContext";
+import DefaultThemeWrapper from "./themes/DefaultThemeWrapper";
 /*
 <Link to="/products">Click me to go to</Link>
 
@@ -24,7 +25,9 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <SiteContextProvider>
+      <DefaultThemeWrapper>
       <RouterProvider router={router}/>
+      </DefaultThemeWrapper>
     </SiteContextProvider>
   );
 };
