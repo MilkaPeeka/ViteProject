@@ -4,18 +4,25 @@ import { useContext, useState } from "react";
 import {SiteContext} from "../contexts/SiteContext"
 import { Box } from "@mui/material";
 const AddRekemView = () => {
-    const [newModelCheckValue, setAddNewModel] = useState(false);
+
+    const [newRekemConfirmed, setNewRekemConfirmation] = useState(false);
+    const [currentMakat, setCurrentMakat] = useState('');
+
     const ctx = useContext(SiteContext);
-    const exampleData = {
-        isRekemFound: true,
-        rekemData: {
-            makat: 998372,
-            valid: 520,
-            invalid: 900,
-            gdud: ctx.userData.gdud
-        },
-        newModelCheckValue,
-        setAddNewModel,
+
+    let queriedRekem;
+
+    ctx.getRekemList()
+    .then(() => {
+        queriedRekem = 
+    });
+
+    const RekemQueryData = {
+        ...searchRekem(currentMakat),
+        newRekemConfirmed,
+        setNewRekemConfirmation,
+        currentMakat,
+        setCurrentMakat
 
     }
 
@@ -30,8 +37,8 @@ const AddRekemView = () => {
     <>
         <h1>rekem view page</h1>
         <Box sx={boxSX}>
-            <RekemForm {...exampleData} />
-            <RekemQueryResult {...exampleData}/>
+            <RekemForm {...RekemQueryData} />
+            <RekemQueryResult {...RekemQueryData}/>
         </Box>
     </>
     );

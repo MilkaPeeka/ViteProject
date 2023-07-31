@@ -3,8 +3,12 @@ props = {
     isRekemFound: boolean,
     gdud: string,
     rekemData: JSON (optional),
-    setAddNewModel: function,
-    newModelCheckValue: boolean
+
+    setNewRekemConfirmation: function,
+    newRekemConfirmed: boolean
+
+    setCurrentMakat: function,
+    currentMakat: string
 }
 */
 
@@ -32,8 +36,7 @@ const RekemForm = (props) => {
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
     };
 
-    const newRekemInSystemConfirmation = props.isRekemFound ? true : props.newModelCheckValue;
-    console.log(newRekemInSystemConfirmation);
+    const isCheckboxConfirmationNeeded = props.isRekemFound ? false : !props.newModelCheckValue;
     return (
         <Card onSubmit={handleSubmit(onSubmit)} component='form' sx={formSX}>
             <FormGroup mb={3}>
@@ -43,7 +46,7 @@ const RekemForm = (props) => {
 
             <FormGroup mb={3}>
                 <FormLabel mb={1}>הכנס מקט רקמ</FormLabel>
-                <TextField variant="outlined" label="מקט רקמ" {...register("makat", {required: "שדה זה לא יכול להישאר ריק!", pattern: {value:  /^\d+$/, message: "מקט חייב להכיל רק ספרות"}})} error={!!errors.makat} />
+                <TextField variant="outlined" label="מקט רקמ" {...register("makat", {required: "שדה זה לא יכול להישאר ריק!", pattern: {value:  /^\d+$/, message: "מקט חייב להכיל רק ספרות"}, onChange: (e) => console.log(e.target.value)})} error={!!errors.makat} />
                 {!!errors.makat &&<FormLabel error mb={1}>{errors.makat?.message}</FormLabel>}
             </FormGroup>
 
@@ -56,7 +59,7 @@ const RekemForm = (props) => {
             <FormGroup>
                 <FormControlLabel control={<Checkbox {...register("isRekemValid")}/>} label="הכלי כשיר" />
             </FormGroup>
-            <Button variant="contained" type="submit" disabled={!newRekemInSystemConfirmation}>הוסף רקמ למערכת!</Button>
+            <Button variant="contained" type="submit" disabled={isCheckboxConfirmationNeeded}>הוסף רקמ למערכת!</Button>
         </Card>  
         
         );
