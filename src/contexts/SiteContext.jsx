@@ -80,11 +80,14 @@ const SiteContextProvider = (props) => {
     loading rekemList on site's load. data is not persistent throughout reloads
     */
     useEffect(() => {
+        if (!state.sessionData.isLoggedIn)
+            return;
+
         console.log("initial site load - loaded rekemList")
         getRekemsByGdud()
         .then((result) => setRekemList(result))
         .catch((err) => console.log(err));
-    }, []);
+    }, [state.sessionData.isLoggedIn]);
     
     
     /*
