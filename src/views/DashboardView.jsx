@@ -6,26 +6,17 @@ import mappings from "../mappings";
 import RekemCardGroup from "../components/Dashboard/RekemCardGroup";
 import { Box } from "@mui/material";
 import GdudSummaryCard from "../components/Dashboard/GdudSummaryCard";
-import GdudGraph from "../components/Charts/GdudGraph";
 import GdudSummaryGraphCard from "../components/Dashboard/GdudSummaryGraphCard";
 
 
 const DashboardView = () => {
     const ctx = useContext(SiteContext);
-    const [rekemList, setRekemList] = useState([]);
-
     const navigate = useNavigate();
-    const loadRekems = () => {
-        ctx.getRekemList()
-        .then(result => setRekemList(result))
-        .catch(err => console.log(err))
-    };
-
+    const rekemList = ctx.rekemList;
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
             return navigate(mappings.signInPath);
 
-        loadRekems();
         // console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
     }, [ctx.sessionData.isLoggedIn]);
 

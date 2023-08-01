@@ -52,7 +52,7 @@ export const userLogOut = async () => {
 export const getRekemsByGdud = async () => {
     try {
         const response = await axios.get(mappings.API_get_rekems_by_gdud, {withCredentials: true});
-        return response.data;
+        return response.data.results;
     }
     catch (err) {
         return {

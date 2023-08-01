@@ -11,20 +11,13 @@ const AddRekemView = () => {
     const navigate = useNavigate();
     const [newRekemConfirmed, setNewRekemConfirmation] = useState(false);
     const [currentMakat, setCurrentMakat] = useState('');
-    const [rekemList, setRekemList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
-    const loadRekems = () => {
-        ctx.getRekemList()
-        .then(result => setRekemList(result))
-        .catch(err => console.log(err))
-    };
+    const rekemList = ctx.rekemList;
 
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
             return navigate(mappings.signInPath);
-        loadRekems();
         // console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
     }, [ctx.sessionData.isLoggedIn]);
 
@@ -34,7 +27,10 @@ const AddRekemView = () => {
         setIsLoading(true);
         setErrorMessage('');
         ctx.addRekemHandler(rekemData)
-        .then(() => loadRekems())
+        .then(() => {
+            ctx.getRekemList();
+            console.log("updaed rekem list");
+        })
         .catch((err) => setErrorMessage(err.message))
         .finally(() => setIsLoading(false));
         

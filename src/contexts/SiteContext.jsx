@@ -1,5 +1,5 @@
 import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud} from '../api/database';
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import {retrieveContextDataFromStorage} from '../helpers/contextHelpers'
 import mappings from '../mappings';
 
@@ -61,6 +61,7 @@ const reducer = (state, action) => {
 //// SITE CONTEXT ////
 export const SiteContext = createContext({
     ...reducerInitialData,
+    rekemList: [],
     toggleDarkmode: async () => {},
     onLogOutHandler: async () => {},
     onLogInHandler: async (pernum) => {},
@@ -72,13 +73,23 @@ export const SiteContext = createContext({
 //// COMPONENT /////
 const SiteContextProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, reducerInitialData);
+    const [rekemList, setRekemList] = useState([]);
+
 
     /*
-    Recieves as an argument: pernum (string)
-    sends a request to the server to authenticate using the pernum
-    on success: updates the states of: sessionData, userData
+    loading rekemList on site's load. data is not persistent throughout reloads
     */
-
+    useEffect(() => {
+        console.log("initial site load - loaded rekemList")
+        getRekemsByGdud()
+        .then((result) => setRekemList(result))
+        .catch((err) => console.log(err));
+    }, []);
+    
+    
+    /*
+    tries to log in using by pernum and creates a session on success
+    */
     const onLogInHandler = async (pernum) => {
         const result = await userLogIn(pernum);
         if (result.error)
@@ -103,8 +114,7 @@ const SiteContextProvider = (props) => {
     };
     
     /*
-    sends a request to the server to log out (doesnt send any arguments because theyre saved in the server)
-    on success: updates the states of: sessionData, userData, rekemsInGdud
+    logs user out; destroys session
     */
     const onLogOutHandler = async () => {
         const result = await userLogOut();
@@ -128,14 +138,12 @@ const SiteContextProvider = (props) => {
         dispatch({type: mappings.toggleDarkMode});
     };
     
-    // does it belong here? thinking of moving it into helpers or just use API directly, 
-    // leaving it for now for cohesion
     const getRekemList = async () => {
         const result = await getRekemsByGdud();
         if (result.error)
             throw new Error(result.error_message);
             
-        return result.results;
+        setRekemList(result);
     };
     
     const addRekemHandler = async (rekemData) => {
@@ -153,6 +161,7 @@ const SiteContextProvider = (props) => {
     return (
         <SiteContext.Provider value={{
             ...state,
+            rekemList,
             toggleDarkmode,
             onLogOutHandler,
             onLogInHandler,
