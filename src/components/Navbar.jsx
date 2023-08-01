@@ -26,7 +26,7 @@ const Navbar = () => {
         .catch(err => console.log(err));
     }
 
-    console.log("navbar rerender");
+    // console.log("navbar rerender");
 
     const darkModeButtonGroup = (
         <ToggleButtonGroup value={alignment} exclusive onChange={handleChange} aria-label="set dark mode">
