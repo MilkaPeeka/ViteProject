@@ -12,6 +12,8 @@ props = {
     currentMakat: string,
 
     submitHandler: function
+
+    sx: JSON (optional)
 }
 */
 
@@ -34,7 +36,9 @@ const RekemQueryResult = (props) => {
         alignItems: "center",
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
         paddingY: 3,
-
+        flexBasis: 0, 
+        flexGrow: 1,
+        ...props.sx,
     };
 
     const failedQueryCheckboxSX = {
@@ -54,8 +58,8 @@ const RekemQueryResult = (props) => {
     const LabelValueTypography = (props) => {
         return (
             <Box display="flex" flexDirection="row" justifyContent="center">
-            <Typography mt={2} variant="h6" paddingX={1}>{props.label}: </Typography>
-            <Typography mt={2} variant="h6" fontWeight="bold">{props.value}</Typography>
+            <Typography mt={2} paddingX={1}>{props.label}: </Typography>
+            <Typography mt={2} fontWeight="bold">{props.value}</Typography>
             </Box>
         );
     }

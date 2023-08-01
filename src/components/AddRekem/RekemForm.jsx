@@ -14,6 +14,7 @@ props = {
     isLoading: boolean,
     
     errorMessage: string
+    sx: JSON (optional)
 }
 */
 

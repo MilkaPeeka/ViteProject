@@ -15,7 +15,8 @@ export const reduceRekemListIntoData = (rekemsList, rekemMakat) => {
         isRekemFound: true,
         rekemData: {
             valid: validRekemsLength,
-            invalid: allRekemsWithSameMakat.length - validRekemsLength 
+            invalid: allRekemsWithSameMakat.length - validRekemsLength,
+            makat: rekemMakat
         }
     };
 }
