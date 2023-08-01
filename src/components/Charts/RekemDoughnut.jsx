@@ -3,7 +3,7 @@ props = {valid: number, invalid: number, height: number, width: number}
 */
 
 import { useTheme } from "@mui/material/styles";
-import { hexToRGB, drawTextInsideDoughnutPlugin } from "../../helpers/DougnutHelpers";
+import { hexToRGB, drawTextInsideDoughnutPlugin } from "../../helpers/ChartHelpers";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, elements } from 'chart.js';
 import { Doughnut } from "react-chartjs-2";
 import { Box } from "@mui/material";

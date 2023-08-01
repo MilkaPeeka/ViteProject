@@ -1,20 +1,16 @@
 /*
 props: {
-    valid: number,
-    invalid: number,
     gdud: number,
+    rekemList,
     sx: JSON (optional)
 }
 */
 
+import { countRekemValidAndInvalid } from "../../helpers/DashboardHelpers";
 import RekemDoughnut from "../Charts/RekemDoughnut";
 import { Box, Typography } from "@mui/material";
-const GdudCard = (props) => {
-    const exampleProp = {
-        valid: 1200,
-        invalid: 2430,
-        gdud: 193
-    };
+const GdudSummaryCard = (props) => {
+    const rekemData = countRekemValidAndInvalid(props.rekemList);
 
     const boxSX = {
         display: 'flex',
@@ -30,13 +26,13 @@ const GdudCard = (props) => {
     <Box sx={boxSX}>
         <Box padding={4}>
             <Typography variant="h3">המצב בגדוד</Typography>
-            <Typography variant="h3" fontWeight="bold">{exampleProp.gdud}</Typography>
+            <Typography variant="h2" fontWeight="bold">{props.gdud}</Typography>
         </Box>
-        <RekemDoughnut valid = {exampleProp.valid} invalid = {exampleProp.invalid} height={250} width = {250}/>
+        <RekemDoughnut {...rekemData} height={250} width = {250}/>
     </Box>
     );
 
 };
 
 
-export default GdudCard;
+export default GdudSummaryCard;

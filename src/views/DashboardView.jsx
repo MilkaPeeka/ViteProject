@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom/";
 import mappings from "../mappings";
 import RekemCardGroup from "../components/Dashboard/RekemCardGroup";
 import { Box } from "@mui/material";
-import GdudCard from "../components/Dashboard/GdudCard";
+import GdudSummaryCard from "../components/Dashboard/GdudSummaryCard";
+import GdudGraph from "../components/Charts/GdudGraph";
+import GdudSummaryGraphCard from "../components/Dashboard/GdudSummaryGraphCard";
 
 
 const DashboardView = () => {
@@ -42,8 +44,9 @@ const DashboardView = () => {
 
     return (
     <Box sx={boxSX}>
-        <GdudCard sx={{marginBottom: 5}}/>
-        <RekemCardGroup rekemList={rekemList}/>
+        <GdudSummaryCard sx={{marginBottom: 5}} rekemList={rekemList} gdud={ctx.userData.gdud}/>
+        <GdudSummaryGraphCard rekemList = {rekemList} sx={{marginBottom: 5}} />
+        <RekemCardGroup {...props}/>
     </Box>
     );
 };
