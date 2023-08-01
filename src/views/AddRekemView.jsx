@@ -6,27 +6,26 @@ import { Box } from "@mui/material";
 import { reduceRekemListIntoData } from "../helpers/RekemQueryHelpers";
 import mappings from "../mappings";
 import { useNavigate } from "react-router-dom/dist";
-const AddRekemView = () => {
+const AddRekemView = () => {    
+    const ctx = useContext(SiteContext);
+    const navigate = useNavigate();
     const [newRekemConfirmed, setNewRekemConfirmation] = useState(false);
     const [currentMakat, setCurrentMakat] = useState('');
     const [rekemList, setRekemList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const ctx = useContext(SiteContext);
-    const navigate = useNavigate();
+    const loadRekems = () => {
+        ctx.getRekemList()
+        .then(result => setRekemList(result))
+        .catch(err => console.log(err))
+    };
 
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
             return navigate(mappings.signInPath);
+        loadRekems();
         console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
-        ctx.getRekemList()
-        .then(result => {
-            setRekemList(result);
-        })
-        .catch(err => {
-            console.log(err);
-        })
     }, [ctx.sessionData.isLoggedIn]);
 
 
@@ -35,22 +34,11 @@ const AddRekemView = () => {
         setIsLoading(true);
         setErrorMessage('');
         ctx.addRekemHandler(rekemData)
-        .then(() => {
-            ctx.getRekemList()
-            .then(result => {
-                setRekemList(result);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        })
-        .catch((err) => {
-            setErrorMessage(err.message);
-        })
+        .then(() => loadRekems())
+        .catch((err) => setErrorMessage(err.message))
         .finally(() => setIsLoading(false));
         
     };
-
 
     const props = {
         ...reduceRekemListIntoData(rekemList, currentMakat),
@@ -71,8 +59,6 @@ const AddRekemView = () => {
         flexGrow: 1,
         flexBasis: 0
     };
-
-
 
     return (
     <>

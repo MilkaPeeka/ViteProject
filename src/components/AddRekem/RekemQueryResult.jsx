@@ -16,8 +16,13 @@ props = {
 */
 
 import { Box, Typography, FormControlLabel, Checkbox } from "@mui/material";
-
+import { useEffect } from "react";
 const RekemQueryResult = (props) => {
+    useEffect(() => {
+        if (!props.isLoading && props.errorMessage === ''){
+            props.setNewRekemConfirmation(false);    
+        }
+    }, [props.isLoading]);
 
     const boxSX = {
         bgcolor: props.isRekemFound ? 'success.light' : 'error.light',
@@ -46,7 +51,7 @@ const RekemQueryResult = (props) => {
     };
 
 
-    const LabelValueTTypography = (props) => {
+    const LabelValueTypography = (props) => {
         return (
             <Box display="flex" flexDirection="row" justifyContent="center">
             <Typography mt={2} variant="h6" paddingX={1}>{props.label}: </Typography>
@@ -59,10 +64,10 @@ const RekemQueryResult = (props) => {
         props.isRekemFound? 
         <>
             <Typography variant="h5">רקמ נמצא בגדוד!</Typography>
-            <LabelValueTTypography label="מקט" value={props.rekemData.makat} />
-            <LabelValueTTypography label="תקינים" value={props.rekemData.valid} />
-            <LabelValueTTypography label="לא תקינים" value={props.rekemData.invalid} />
-            <LabelValueTTypography label="אחוזי תקינות הרקמ בגדוד" value={Math.round(100 * props.rekemData.valid / (props.rekemData.valid + props.rekemData.invalid)) + "%"} />
+            <LabelValueTypography label="מקט" value={props.rekemData.makat} />
+            <LabelValueTypography label="תקינים" value={props.rekemData.valid} />
+            <LabelValueTypography label="לא תקינים" value={props.rekemData.invalid} />
+            <LabelValueTypography label="אחוזי תקינות הרקמ בגדוד" value={Math.round(100 * props.rekemData.valid / (props.rekemData.valid + props.rekemData.invalid)) + "%"} />
         </>
         :
         <>

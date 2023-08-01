@@ -19,17 +19,30 @@ props = {
 
 import { useForm } from "react-hook-form";
 import { Card, FormGroup, FormLabel, TextField, Checkbox, Button, FormControlLabel, CircularProgress } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const RekemForm = (props) => {
-    const {formState, handleSubmit, register} = useForm({
+    const [successful, setSuccessful] = useState(false);
+    const {formState, handleSubmit, register, reset, watch} = useForm({
         defaultValues: {
             makat: '',
             serialNum: '',
             isRekemValid: false
         }
     });
+    const { errors, isDirty } = formState;
 
-    const { errors } = formState;
+    useEffect(() => {
+        if (isDirty && !props.isLoading && props.errorMessage === ''){
+            reset();
+            setSuccessful(true);
+            props.setCurrentMakat('');
+        }
+        if (props.isLoading){
+            setSuccessful(false);
+        }
+    }, [props.isLoading]);
+
     
     const formSX = {
         display: 'flex',
@@ -42,7 +55,6 @@ const RekemForm = (props) => {
     };
 
     const isCheckboxConfirmationNeeded = props.isRekemFound ? false : !props.newRekemConfirmed;
-    
     return (
         <Card onSubmit={handleSubmit(props.submitHandler)} component='form' sx={formSX}>
             <FormGroup mb={3}>
@@ -63,9 +75,10 @@ const RekemForm = (props) => {
             </FormGroup>
 
             <FormGroup>
-                <FormControlLabel control={<Checkbox {...register("isRekemValid")}/>} label="הכלי כשיר" />
+                <FormControlLabel control={<Checkbox {...register("isRekemValid")} checked={watch('isRekemValid')}/>} label="הכלי כשיר" />
             </FormGroup>
-                {props.errorMessage !== '' && <FormLabel error sx={{paddingTop: 1}}>{props.errorMessage}</FormLabel>}
+            {props.errorMessage !== '' && <FormLabel error sx={{paddingTop: 1}}>{props.errorMessage}</FormLabel>}
+            {successful && <FormLabel sx={{paddingTop: 1, color:"success.light"}}>רקמ נוסף למערכת בהצלחה!</FormLabel>}
             {props.isLoading ? <CircularProgress color="primary" /> : <Button variant="contained" type="submit" disabled={isCheckboxConfirmationNeeded}>הוסף רקמ למערכת!</Button>}
         </Card>  
         
