@@ -16,8 +16,8 @@ const GdudSummaryGraphCard = (props) => {
     const data = transformRekemDataToPercentages(rekemsValidAndInvalid);
     console.log(data);
     const boxSX = {
-        paddingX: 8,
-        paddingY: 3,
+        paddingX: 2,
+        paddingTop: 3,
         boxShadow: 3,
         borderRadius: 10,
         ...props.sx
@@ -25,7 +25,7 @@ const GdudSummaryGraphCard = (props) => {
 
     return (
     <Box sx={boxSX}>
-        <GdudGraph itemList={data} sx={{width: "100%", height: "100%"}}/>
+        <GdudGraph itemList={data} sx={props.sx}/>
     </Box>
     );
 
