@@ -9,7 +9,9 @@ props = {
     newRekemConfirmed: boolean
 
     setCurrentMakat: function,
-    currentMakat: string
+    currentMakat: string,
+
+    submitHandler: function
 }
 */
 
@@ -44,7 +46,7 @@ const RekemQueryResult = (props) => {
     };
 
 
-    const DisplayText = (props) => {
+    const LabelValueTTypography = (props) => {
         return (
             <Box display="flex" flexDirection="row" justifyContent="center">
             <Typography mt={2} variant="h6" paddingX={1}>{props.label}: </Typography>
@@ -57,10 +59,10 @@ const RekemQueryResult = (props) => {
         props.isRekemFound? 
         <>
             <Typography variant="h5">רקמ נמצא בגדוד!</Typography>
-            <DisplayText label="מקט" value={props.rekemData.makat} />
-            <DisplayText label="תקינים" value={props.rekemData.valid} />
-            <DisplayText label="לא תקינים" value={props.rekemData.invalid} />
-            <DisplayText label="אחוזי תקינות הרקמ בגדוד" value={Math.round(100 * props.rekemData.valid / (props.rekemData.valid + props.rekemData.invalid)) + "%"} />
+            <LabelValueTTypography label="מקט" value={props.rekemData.makat} />
+            <LabelValueTTypography label="תקינים" value={props.rekemData.valid} />
+            <LabelValueTTypography label="לא תקינים" value={props.rekemData.invalid} />
+            <LabelValueTTypography label="אחוזי תקינות הרקמ בגדוד" value={Math.round(100 * props.rekemData.valid / (props.rekemData.valid + props.rekemData.invalid)) + "%"} />
         </>
         :
         <>

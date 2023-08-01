@@ -8,12 +8,17 @@ props = {
     newRekemConfirmed: boolean
 
     setCurrentMakat: function,
-    currentMakat: string
+    currentMakat: string,
+
+    submitHandler: function,
+    isLoading: boolean,
+    
+    errorMessage: string
 }
 */
 
 import { useForm } from "react-hook-form";
-import { Card, FormGroup, FormLabel, TextField, Checkbox, Button, FormControlLabel } from "@mui/material";
+import { Card, FormGroup, FormLabel, TextField, Checkbox, Button, FormControlLabel, CircularProgress } from "@mui/material";
 
 const RekemForm = (props) => {
     const {formState, handleSubmit, register} = useForm({
@@ -25,10 +30,10 @@ const RekemForm = (props) => {
     });
 
     const { errors } = formState;
-
-    const onSubmit = data => console.log(data);
     
     const formSX = {
+        display: 'flex',
+        flexDirection: 'column',
         padding: 2,
         borderRadius: 6,
         flexBasis: 0, 
@@ -37,8 +42,9 @@ const RekemForm = (props) => {
     };
 
     const isCheckboxConfirmationNeeded = props.isRekemFound ? false : !props.newRekemConfirmed;
+    
     return (
-        <Card onSubmit={handleSubmit(onSubmit)} component='form' sx={formSX}>
+        <Card onSubmit={handleSubmit(props.submitHandler)} component='form' sx={formSX}>
             <FormGroup mb={3}>
                 <FormLabel mb={1}>מספר גדוד</FormLabel>
                 <TextField variant="outlined" disabled value={props.gdud}/>
@@ -59,7 +65,8 @@ const RekemForm = (props) => {
             <FormGroup>
                 <FormControlLabel control={<Checkbox {...register("isRekemValid")}/>} label="הכלי כשיר" />
             </FormGroup>
-            <Button variant="contained" type="submit" disabled={isCheckboxConfirmationNeeded}>הוסף רקמ למערכת!</Button>
+                {props.errorMessage !== '' && <FormLabel error sx={{paddingTop: 1}}>{props.errorMessage}</FormLabel>}
+            {props.isLoading ? <CircularProgress color="primary" /> : <Button variant="contained" type="submit" disabled={isCheckboxConfirmationNeeded}>הוסף רקמ למערכת!</Button>}
         </Card>  
         
         );

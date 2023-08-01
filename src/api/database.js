@@ -69,7 +69,7 @@ export const getRekemsByGdud = async () => {
 
 export const addRekemToGdud = async (rekemData) => {
     try {
-        const response = await axios.post(mappings.API_add_rekem, {rekemData}, {withCredentials: true});
+        const response = await axios.post(mappings.API_add_rekem, rekemData, {withCredentials: true});
         return response.data;
     }
 

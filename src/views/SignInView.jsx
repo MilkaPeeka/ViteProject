@@ -27,8 +27,13 @@ const SignInView = () => {
 
     };
 
-
-    return <SignInForm onSubmitHandler = {onSubmitHandler} isLoading = {isLoading} errorMessage = {errorMessage}/>
+    const props = {
+        onSubmitHandler,
+        isLoading,
+        errorMessage
+    };
+    
+    return <SignInForm {...props}/>
 
 };
 

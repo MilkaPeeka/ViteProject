@@ -17,10 +17,10 @@ const router = createBrowserRouter([
   {path: '/', element: <Root />,
   errorElement: <ErrorView />,
   children: [
-    {path: '/' + mappings.addRekemPath, element: <AddRekemView />},
-    {path: '/' + mappings.signInPath, element: <SignInView />},
-    {path: '/' + mappings.dashboardPath, element: <DashboardView />},
-    {path: '/' + mappings.devPath, element: <DevView />},
+    {path: mappings.addRekemPath, element: <AddRekemView />},
+    {path: mappings.signInPath, element: <SignInView />},
+    {path: mappings.dashboardPath, element: <DashboardView />},
+    {path: mappings.devPath, element: <DevView />},
   ]
   }]);
 

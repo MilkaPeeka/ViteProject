@@ -10,13 +10,15 @@ const AddRekemView = () => {
     const [newRekemConfirmed, setNewRekemConfirmation] = useState(false);
     const [currentMakat, setCurrentMakat] = useState('');
     const [rekemList, setRekemList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
     const ctx = useContext(SiteContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
             return navigate(mappings.signInPath);
-
         console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
         ctx.getRekemList()
         .then(result => {
@@ -28,13 +30,38 @@ const AddRekemView = () => {
     }, [ctx.sessionData.isLoggedIn]);
 
 
-    const RekemQueryData = {
+    const submitHandler = (rekemData) => {
+        console.log(rekemData);
+        setIsLoading(true);
+        setErrorMessage('');
+        ctx.addRekemHandler(rekemData)
+        .then(() => {
+            ctx.getRekemList()
+            .then(result => {
+                setRekemList(result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        })
+        .catch((err) => {
+            setErrorMessage(err.message);
+        })
+        .finally(() => setIsLoading(false));
+        
+    };
+
+
+    const props = {
         ...reduceRekemListIntoData(rekemList, currentMakat),
             gdud: ctx.userData.gdud,
             setNewRekemConfirmation,
             newRekemConfirmed,
             currentMakat,
-            setCurrentMakat
+            setCurrentMakat,
+            submitHandler,
+            isLoading,
+            errorMessage
     };
 
     const boxSX = {
@@ -45,12 +72,14 @@ const AddRekemView = () => {
         flexBasis: 0
     };
 
+
+
     return (
     <>
         <h1>rekem view page</h1>
         <Box sx={boxSX}>
-            <RekemForm {...RekemQueryData} />
-            <RekemQueryResult {...RekemQueryData}/>
+            <RekemForm {...props} />
+            <RekemQueryResult {...props}/>
         </Box>
     </>
     );

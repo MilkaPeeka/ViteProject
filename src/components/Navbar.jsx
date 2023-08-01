@@ -28,19 +28,20 @@ const Navbar = () => {
 
     console.log("navbar rerender");
 
+    const darkModeButtonGroup = (
+        <ToggleButtonGroup value={alignment} exclusive onChange={handleChange} aria-label="set dark mode">
+            <ToggleButton value="sun"><WbSunnyIcon /></ToggleButton>
+            <ToggleButton value="moon"><ModeNightIcon /></ToggleButton>
+        </ToggleButtonGroup>
+    );
+
+
     const LeftButtonGroup = (
         <Box display="flex" flexDirection="row">
         {isLoadingLoggingOut && <CircularProgress color="warning" sx={{marginRight: 9}}/>}
         {!isLoadingLoggingOut && ctx.sessionData.isLoggedIn && <Button variant="outlined" color="warning" onClick={onLogOut} sx={{marginRight: 6}}>התנתקות</Button>}
         {!ctx.sessionData.isLoggedIn && <Button component={Link} to={mappings.signInPath} variant="outlined" color="success" sx={{marginRight: 6}}>התחברות</Button>}
-        <ToggleButtonGroup value={alignment} exclusive onChange={handleChange} aria-label="set dark mode">
-          <ToggleButton value="sun">
-            <WbSunnyIcon />
-          </ToggleButton>
-          <ToggleButton value="moon">
-            <ModeNightIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
+        {darkModeButtonGroup}
         </Box>
 
       );
@@ -56,15 +57,14 @@ const Navbar = () => {
 
     return (
         <>
-            <AppBar position="static">
-                <Toolbar>
-                    <Box display="flex" justifyContent="space-between" flexGrow={1} marginX="10%">
-                        {RightButtonGroup}
-                        {LeftButtonGroup}
-                    </Box>
-                </Toolbar>
-            </AppBar>
-
+        <AppBar position="static">
+            <Toolbar>
+                <Box display="flex" justifyContent="space-between" flexGrow={1} marginX="10%">
+                    {RightButtonGroup}
+                    {LeftButtonGroup}
+                </Box>
+            </Toolbar>
+        </AppBar>
         </>
     );
 };

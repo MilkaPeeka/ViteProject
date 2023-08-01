@@ -139,7 +139,12 @@ const SiteContextProvider = (props) => {
     };
     
     const addRekemHandler = async (rekemData) => {
-        const result = await addRekemToGdud(rekemData);
+        const apiData = {
+            carNumber: rekemData.serialNum,
+            makat: rekemData.makat,
+            kshirot: rekemData.isRekemValid,
+        }
+        const result = await addRekemToGdud(apiData);
         if (result.error)
             throw new Error(result.error_message);
     };
