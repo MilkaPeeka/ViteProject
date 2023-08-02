@@ -5,7 +5,7 @@ import mappings from "../mappings";
 import SchoolIcon from '@mui/icons-material/School';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const ctx = useContext(SiteContext);
@@ -45,12 +45,20 @@ const Navbar = () => {
 
       );
 
+      
+    const rightButtonsSX = {
+        color: ctx.isInDarkMode? "primary.light" : 'white',
+        "&.active": {
+            color: "primary",
+            backgroundColor: "background.paper"
+        }
+    };
 
     const RightButtonGroup = (
         <Box>
-            <IconButton component={Link} to={mappings.devPath} size={'large'} aria-label='logo'><SchoolIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}}/></IconButton>
-            {ctx.sessionData.isLoggedIn && <Button component={Link} to={mappings.dashboardPath} variant="text" size="large" sx={{color: ctx.isInDarkMode? "primary.light" : 'white'}} >מסך מידע</Button>}
-            {ctx.sessionData.isLoggedIn && ctx.userData.isManager && <Button component={Link} to={mappings.addRekemPath} variant="text" size="large" sx={{color: ctx.isInDarkMode ? "primary.light" : 'white'}}>הוספת רקמ</Button>}
+            <IconButton component={NavLink} to={mappings.devPath} size={'large'} aria-label='logo'><SchoolIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}}/></IconButton>
+            {ctx.sessionData.isLoggedIn && <Button component={NavLink} to={mappings.dashboardPath} variant="text" size="large" sx={rightButtonsSX} >מסך מידע</Button>}
+            {ctx.sessionData.isLoggedIn && ctx.userData.isManager && <Button component={NavLink} to={mappings.addRekemPath} variant="text" size="large" sx={rightButtonsSX}>הוספת רקמ</Button>}
         </Box>
     );
 
