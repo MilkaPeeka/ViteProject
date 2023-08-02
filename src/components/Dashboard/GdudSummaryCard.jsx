@@ -20,6 +20,7 @@ const GdudSummaryCard = (props) => {
         paddingY: 3,
         boxShadow: 3,
         borderRadius: 10,
+        bgcolor: "background.paper",
         ...props.sx
     }
     return (

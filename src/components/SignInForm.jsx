@@ -6,6 +6,7 @@ props:
 {onSubmitHandler}
 {isLoading}
 {errorMessage}
+sx: optional
 */
 
 const SignInForm = (props) => {
@@ -18,9 +19,10 @@ const SignInForm = (props) => {
     const { errors } = formState;
 
     const boxSX = {
-        padding: 3,
-        bgcolor: 'black',
+        padding: 1.5,
+        bgcolor: 'primary.light',
         borderRadius: 6,
+        ...props.sx
     };
 
     const cardSX = {
@@ -28,7 +30,7 @@ const SignInForm = (props) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 6,
+        borderRadius: 4,
         paddingBottom: 4
     };
 

@@ -18,13 +18,34 @@ const DefaultThemeWrapper = (props) => {
             direction: 'rtl',
             palette: {
                 mode: ctx.isInDarkMode ? 'dark' : 'light',
-                primary: {
-                    main: '#4527a0',
-                  },
-                  secondary: {
-                    main: '#6200ea',
-                  }
-                }
+                  ...(!ctx.isInDarkMode
+                    ? {
+                        // palette values for light mode
+                        primary: {
+                          main: '#4527a0',
+                        },
+                        secondary: {
+                          main: '#f50057',
+                        },
+                        success: {
+                          main: '#2b9c32',
+                          light: '#66c96d',
+                        },
+                      }
+                    : {
+                        // palette values for dark mode
+                        primary: {
+                          main: '#ffe57f',
+                        },
+                        secondary: {
+                          main: '#f50057',
+                        },
+                        background: {
+                          paper: '#1a1a1a',
+                        },
+                      }),
+                },
+
           });
           const cacheRtl = createCache({
             key: 'muirtl',

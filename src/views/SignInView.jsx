@@ -33,7 +33,9 @@ const SignInView = () => {
         errorMessage
     };
     
-    return <SignInForm {...props}/>
+    return (
+        <SignInForm {...props} sx={{marginX: 50, marginY: 20}}/>
+    );
 
 };
 

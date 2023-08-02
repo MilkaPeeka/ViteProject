@@ -35,6 +35,8 @@ const RekemDoughnut = (props) => {
 
     const options = {
       animations: false,
+      normalized: true,
+      parsing: false,
       events: [],
       maintainAspectRatio: false,
       cutout: 65,

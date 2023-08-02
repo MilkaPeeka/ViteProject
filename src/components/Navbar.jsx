@@ -5,7 +5,6 @@ import mappings from "../mappings";
 import SchoolIcon from '@mui/icons-material/School';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -30,8 +29,8 @@ const Navbar = () => {
 
     const darkModeButtonGroup = (
         <ToggleButtonGroup value={alignment} exclusive onChange={handleChange} aria-label="set dark mode">
-            <ToggleButton value="sun"><WbSunnyIcon /></ToggleButton>
-            <ToggleButton value="moon"><ModeNightIcon /></ToggleButton>
+            <ToggleButton value="sun"><WbSunnyIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}} /></ToggleButton>
+            <ToggleButton value="moon"><ModeNightIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}}/></ToggleButton>
         </ToggleButtonGroup>
     );
 
@@ -39,8 +38,8 @@ const Navbar = () => {
     const LeftButtonGroup = (
         <Box display="flex" flexDirection="row">
         {isLoadingLoggingOut && <CircularProgress color="warning" sx={{marginRight: 9}}/>}
-        {!isLoadingLoggingOut && ctx.sessionData.isLoggedIn && <Button variant="outlined" color="warning" onClick={onLogOut} sx={{marginRight: 6}}>התנתקות</Button>}
-        {!ctx.sessionData.isLoggedIn && <Button component={Link} to={mappings.signInPath} variant="outlined" color="success" sx={{marginRight: 6}}>התחברות</Button>}
+        {!isLoadingLoggingOut && ctx.sessionData.isLoggedIn && <Button variant="contained" color="warning" onClick={onLogOut} sx={{marginRight: 6}}>התנתקות</Button>}
+        {!ctx.sessionData.isLoggedIn && <Button component={Link} to={mappings.signInPath} variant="contained" color="success" sx={{marginRight: 6}}>התחברות</Button>}
         {darkModeButtonGroup}
         </Box>
 
@@ -49,9 +48,9 @@ const Navbar = () => {
 
     const RightButtonGroup = (
         <Box>
-            <IconButton component={Link} to={mappings.devPath} color={ctx.isInDarkMode ? 'primary' : 'inherit'} size={'large'} aria-label='logo'><SchoolIcon/></IconButton>
-            {ctx.sessionData.isLoggedIn && <Button component={Link} to={mappings.dashboardPath} variant="text" size="large" color={ctx.isInDarkMode ? 'primary' : 'inherit'}>מסך מידע</Button>}
-            {ctx.sessionData.isLoggedIn && ctx.userData.isManager && <Button component={Link} to={mappings.addRekemPath} variant="text" size="large" color={ctx.isInDarkMode ? 'primary' : 'inherit'}>הוספת רקמ</Button>}
+            <IconButton component={Link} to={mappings.devPath} size={'large'} aria-label='logo'><SchoolIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}}/></IconButton>
+            {ctx.sessionData.isLoggedIn && <Button component={Link} to={mappings.dashboardPath} variant="text" size="large" sx={{color: ctx.isInDarkMode? "primary.light" : 'white'}} >מסך מידע</Button>}
+            {ctx.sessionData.isLoggedIn && ctx.userData.isManager && <Button component={Link} to={mappings.addRekemPath} variant="text" size="large" sx={{color: ctx.isInDarkMode ? "primary.light" : 'white'}}>הוספת רקמ</Button>}
         </Box>
     );
 

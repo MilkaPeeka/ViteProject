@@ -42,14 +42,15 @@ const RekemCardGroup = (props) => {
         overflowX: 'hidden',
         '&::-webkit-scrollbar': { display: 'none' },
         borderBottomLeftRadius: 40,
-        borderBottomRightRadius: 40
+        borderBottomRightRadius: 40,
+        
     };
 
     const headerSX = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        bgcolor: 'primary.light',
+        bgcolor: 'background.paper',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40
 
@@ -73,13 +74,13 @@ const RekemCardGroup = (props) => {
 
     const RekemGroupHeader = (
         <Box sx={headerSX}>
-            <Typography mt={4} mx={4} variant="h5">חיפוש כלי בגדוד:</Typography>
+            <Typography sx={{marginTop: 4, marginX: 4}} variant="h5">חיפוש כלי בגדוד:</Typography>
             <TextField
                 sx={{m: 2}}
-                type="search"
                 label="חיפוש לפי מקט"
                 variant="standard"
-                onChange={onChangeHandler} // Add the onChange event here
+                onChange={onChangeHandler}
+
             />
         </Box>
     );

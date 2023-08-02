@@ -52,7 +52,12 @@ const GdudGraph = (props) => {
         ],
     };
 
-    const options = {animations: false, plugins: {legend: {display: false}}};
+    const options = {
+      normalized: true, 
+      animations: false, 
+      // parsing: false,
+      plugins: 
+        {legend: {display: false}}};
     return (
         <Box
         sx={props.sx}>

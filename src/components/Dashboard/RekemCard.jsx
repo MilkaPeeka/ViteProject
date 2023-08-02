@@ -21,7 +21,8 @@ const RekemCard = (props) => {
         flexDirection: "column",
         width: props.width,
         height: props.height,
-        margin: props.margin
+        margin: props.margin,
+        bgcolor: "background.paper"
     };
 
 
