@@ -43,7 +43,7 @@ const RekemCardGroup = (props) => {
         '&::-webkit-scrollbar': { display: 'none' },
         borderBottomLeftRadius: 40,
         borderBottomRightRadius: 40,
-        
+        bgcolor: 'background.paper',
     };
 
     const headerSX = {
@@ -74,12 +74,14 @@ const RekemCardGroup = (props) => {
 
     const RekemGroupHeader = (
         <Box sx={headerSX}>
-            <Typography sx={{marginTop: 4, marginX: 4}} variant="h5">חיפוש כלי בגדוד:</Typography>
+            <Typography sx={{marginTop: 4, marginX: 4, color: 'primary.light'}} variant="h5">חיפוש כלי בגדוד:</Typography>
             <TextField
                 sx={{m: 2}}
                 label="חיפוש לפי מקט"
                 variant="standard"
                 onChange={onChangeHandler}
+                InputLabelProps={{sx: {color: 'primary.light'}}}
+
 
             />
         </Box>

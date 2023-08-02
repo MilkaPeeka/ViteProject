@@ -22,7 +22,7 @@ const RekemCard = (props) => {
         width: props.width,
         height: props.height,
         margin: props.margin,
-        bgcolor: "background.paper"
+        bgcolor: "background.default"
     };
 
 

@@ -1,4 +1,4 @@
-import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud} from '../api/database';
+import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud, getRekemsOfUser} from '../api/database';
 import { createContext, useEffect, useReducer, useState } from 'react';
 import {retrieveContextDataFromStorage} from '../helpers/contextHelpers'
 import mappings from '../mappings';
@@ -67,7 +67,8 @@ export const SiteContext = createContext({
     onLogOutHandler: async () => {},
     onLogInHandler: async (pernum) => {},
     addRekemHandler: async (rekemData) => {}, 
-    getRekemList: async () => {}
+    getRekemList: async () => {},
+    getRekemListByGdud: async (gdud) => {}
 });
 
 
@@ -86,12 +87,10 @@ const SiteContextProvider = (props) => {
         }
 
         console.log("initial site load - loaded rekemList")
-        getRekemsByGdud()
+        getRekemsOfUser()
         .then((result) => setRekemList(result))
         .catch((err) => console.log(err));
     }, [state.sessionData.isLoggedIn]);
-    
-    
     /*
     tries to log in using by pernum and creates a session on success
     */
@@ -111,7 +110,6 @@ const SiteContextProvider = (props) => {
             sessionExpiryDate: result.sessionExpiry 
         };
 
-        setRekemList([]);
         dispatch({type: mappings.setUserData, value: userData});
         dispatch({type: mappings.setSessionData, value: sessionData});
         localStorage.setItem(mappings.sessionData, JSON.stringify(sessionData));
@@ -145,11 +143,19 @@ const SiteContextProvider = (props) => {
     };
     
     const getRekemList = async () => {
-        const result = await getRekemsByGdud();
+        const result = await getRekemsOfUser();
         if (result.error)
             throw new Error(result.error_message);
             
         setRekemList(result);
+    };
+
+    const getRekemListByGdud = async (gdud) => {
+        const result = await getRekemsByGdud(gdud);
+        if (result.error)
+            throw new Error(result.error_message);
+            
+        return result;
     };
     
     const addRekemHandler = async (rekemData) => {
@@ -172,7 +178,8 @@ const SiteContextProvider = (props) => {
             onLogOutHandler,
             onLogInHandler,
             addRekemHandler,
-            getRekemList
+            getRekemList,
+            getRekemListByGdud
         }}>
             {props.children}
         </SiteContext.Provider>

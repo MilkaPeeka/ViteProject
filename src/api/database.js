@@ -49,9 +49,24 @@ export const userLogOut = async () => {
 /*
     Returns a list of rekems of user's gdud.
 */
-export const getRekemsByGdud = async () => {
+export const getRekemsOfUser = async () => {
     try {
-        const response = await axios.get(mappings.API_get_rekems_by_gdud, {withCredentials: true});
+        const response = await axios.get(mappings.API_get_rekems_of_user, {withCredentials: true});
+        return response.data.results;
+    }
+    catch (err) {
+        return {
+            error: true,
+            error_message: err.message
+        };
+    }
+};
+/*
+    Returns a list of rekems of choice. Will return a valid result only if user is admin.
+*/
+export const getRekemsByGdud = async (gdud) => {
+    try {
+        const response = await axios.get(mappings.API_get_rekems_by_gdud + gdud, {withCredentials: true});
         return response.data.results;
     }
     catch (err) {

@@ -1,14 +1,3 @@
-/*
-TODO: 
-1. add 500 error on server error
-2. add 400 error on empty query (?)
-3. refactoring, obviously
-4. authentication user Bearer
-5. learn more about mongo caching
-6. adding indexes?
-7. params vs query (i.e: rakams/get_by_gdud/80 OR rakams/get_by_gdud?gdud=80)
-*/
-
 
 require('dotenv').config();
 const mongoose = require('mongoose');
@@ -143,41 +132,8 @@ app.get('/api/logout', (req, res) => {
   });
 });
 
-// const main = async () => {
-//     try {
-//       const users = await User.find({});
-//       console.log(users);
-  
-//       const carDatas = await carData.find({});
-//       console.log(carDatas);
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
-  
-//   main().then(() => {
-//     mongoose.connection.close();
-//   });
 
-// app.get('/api/rakams/get_by_gdud_and_makat/:gdud/:makat',authenticateMiddleware, async (req, res) => {
-//   const makat = req.params.makat;
-//   const gdud = req.params.gdud;
-//   try {
-//     const queryResult = await carData.find({
-//       makat: makat,
-//       gdud: gdud
-//     });
-
-//     res.json({error: false,  results: queryResult});
-//   }
-
-//   catch (error) {
-//     res.json({error: true, error_msg: error.message});
-//   }
-
-// });
-
-app.get('/api/rekems/get_by_gdud/',authenticateMiddleware, async (req, res) => {
+app.get('/api/rekems/get_of_user/',authenticateMiddleware, async (req, res) => {
   try {
     const queryResult = await carData.find({
       gdud: req.user.gdud
@@ -192,22 +148,20 @@ app.get('/api/rekems/get_by_gdud/',authenticateMiddleware, async (req, res) => {
 
 });
 
+app.get('/api/rekems/get_by_gdud/:gdud',authenticateMiddleware, async (req, res) => {
+  try {
+    const queryResult = await carData.find({
+      gdud: req.params.gdud
+    });
 
-// app.get('/api/users/get_by_pernum/:pernum',authenticateMiddleware, async (req,res) => {
-//   const pernum = req.params.pernum;
+    res.json({error: false, results: queryResult});
+  }
 
-//   try {
-//     const queryResult = await User.find({pernum: pernum});
-//     res.json({error: false,  results: queryResult});
-//   }
+  catch (error) {
+    res.json({error: true, error_msg: error.message});
+  }
 
-//   catch (error) {
-//     res.json({error: true, error_msg: error.message});
-//   }
-
-// });
-
-
+});
 app.post('/api/rekems/add/',authenticateMiddleware, async (req, res) => {
   if (!req.user.isManager){
     res.json({error: true, error_message: 'Unauthorized to add new rakams'});
