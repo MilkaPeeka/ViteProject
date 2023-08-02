@@ -125,6 +125,8 @@ const SiteContextProvider = (props) => {
         if (result.error)
             throw new Error(result.error_message);
 
+
+        setRekemList([]);
         dispatch({type: mappings.setRekemList, value: []});
         dispatch({type: mappings.setUserData, value: defaultUserData});
         dispatch({type: mappings.setSessionData, value: defaultSessionData});
