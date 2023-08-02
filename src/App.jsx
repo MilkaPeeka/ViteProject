@@ -1,5 +1,5 @@
-
-import { RouterProvider, createBrowserRouter, Link } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate } from "react-router-dom"; // Import Redirect from react-router-dom
 import SignInView from "./views/SignInView";
 import AddRekemView from "./views/AddRekemView";
 import DashboardView from "./views/DashboardView";
@@ -9,26 +9,30 @@ import mappings from "./mappings";
 import SiteContextProvider from "./contexts/SiteContext";
 import DefaultThemeWrapper from "./themes/DefaultThemeWrapper";
 import DevView from "./views/DevView";
-/*
-<Link to="/products">Click me to go to</Link>
 
-*/
 const router = createBrowserRouter([
-  {path: '/', element: <Root />,
-  errorElement: <ErrorView />,
-  children: [
-    {path: mappings.addRekemPath, element: <AddRekemView />},
-    {path: mappings.signInPath, element: <SignInView />},
-    {path: mappings.dashboardPath, element: <DashboardView />},
-    {path: mappings.devPath, element: <DevView />},
-  ]
-  }]);
+  // Add a new Route for redirecting from '/' to '/dashboard'
+  { path: '/', element: <Navigate to={mappings.dashboardPath} /> },
+
+  // The existing routes
+  {
+    path: '/',
+    element: <Root />,
+    errorElement: <ErrorView />,
+    children: [
+      { path: mappings.addRekemPath, element: <AddRekemView /> },
+      { path: mappings.signInPath, element: <SignInView /> },
+      { path: mappings.dashboardPath, element: <DashboardView /> },
+      { path: mappings.devPath, element: <DevView /> },
+    ],
+  },
+]);
 
 const App = () => {
   return (
     <SiteContextProvider>
       <DefaultThemeWrapper>
-      <RouterProvider router={router}/>
+        <RouterProvider router={router} />
       </DefaultThemeWrapper>
     </SiteContextProvider>
   );
