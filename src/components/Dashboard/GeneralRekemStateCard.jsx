@@ -36,7 +36,7 @@ const GeneralRekemStateCard = (props) => {
         justifyContent: 'center',
         alignItems: 'center',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
-        borderRadius: 10,
+        borderRadius: 6,
         ...props.sx
     };
     const handleSubmit = (event) => {
