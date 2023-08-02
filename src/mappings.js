@@ -19,6 +19,7 @@ setUserData: "SETUSERDATA",
 setSessionData: "SETSESSIONDATA",
 toggleDarkMode: "TOGGLEDARKMODE",
 setDarkMode: "SETDARKMODE",
+setRekemList: "SETREKEMLIST",
 
 ////////////////////    LOCAL STORAGE   ////////////////////
 darkMode: "DARKMODE",

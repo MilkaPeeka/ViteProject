@@ -16,14 +16,14 @@ const defaultSessionData = {
     sessionExpiryDate: null,
 };
 
+const reducerInitialState = {
+    sessionData: defaultSessionData,
+    userData: defaultUserData,
+    isInDarkMode: false,
+    ...retrieveContextDataFromStorage(),
+    rekemList: []
+};
 
-/*
-NOTE: We don't save or retireve any data from the database until we are sure that the user is authenticated. 
-Because we are not sure that the session is still valid and user is authenticated (as the user can change the cookies locally),
-we wont include any sensitive information like rekems list. For that the user will have to request for it,
-and if the user is not authenticated in the server then we will reset the cookies state.
-*/
-const reducerInitialData = retrieveContextDataFromStorage(defaultUserData, defaultSessionData);
 
 //// REDUCER FUNCTION /////
 const reducer = (state, action) => {
@@ -52,6 +52,12 @@ const reducer = (state, action) => {
                 isInDarkMode: action.value
             };
 
+        case mappings.setRekemList:
+            return {
+                ...state,
+                rekemList: action.value
+            };
+
         default:
             return state;
     }
@@ -61,7 +67,7 @@ const reducer = (state, action) => {
 
 //// SITE CONTEXT ////
 export const SiteContext = createContext({
-    ...reducerInitialData,
+    ...reducerInitialState,
     rekemList: [],
     toggleDarkmode: async () => {},
     onLogOutHandler: async () => {},
@@ -74,10 +80,7 @@ export const SiteContext = createContext({
 
 //// COMPONENT /////
 const SiteContextProvider = (props) => {
-    const [state, dispatch] = useReducer(reducer, reducerInitialData);
-    const [rekemList, setRekemList] = useState([]);
-    
-
+    const [state, dispatch] = useReducer(reducer, reducerInitialState);
     /*
     loading rekemList on site's load. data is not persistent throughout reloads
     */
@@ -87,7 +90,7 @@ const SiteContextProvider = (props) => {
         }
     console.log("initial site load - loaded rekemList")
     getRekemsOfUser()
-    .then((result) => setRekemList(result))
+    .then((result) => dispatch({type: mappings.setRekemList, value:result}))
     .catch((err) => console.log(err));
     }, [state.sessionData.isLoggedIn]);
     /*
@@ -125,7 +128,6 @@ const SiteContextProvider = (props) => {
             throw new Error(result.error_message);
 
 
-        setRekemList([]);
         dispatch({type: mappings.setRekemList, value: []});
         dispatch({type: mappings.setUserData, value: defaultUserData});
         dispatch({type: mappings.setSessionData, value: defaultSessionData});
@@ -148,7 +150,7 @@ const SiteContextProvider = (props) => {
         if (result.error)
             throw new Error(result.error_message);
             
-        setRekemList(result);
+        dispatch({type: mappings.setRekemList, value:result});
     };
 
     const getRekemListByGdud = async (gdud) => {
@@ -174,7 +176,6 @@ const SiteContextProvider = (props) => {
     return (
         <SiteContext.Provider value={{
             ...state,
-            rekemList,
             toggleDarkmode,
             onLogOutHandler,
             onLogInHandler,
