@@ -9,7 +9,7 @@ props: {
 import { countRekemValidAndInvalid } from "../../helpers/DashboardHelpers";
 import RekemDoughnut from "../Charts/RekemDoughnut";
 import { Box, Typography } from "@mui/material";
-const GdudSummaryCard = (props) => {
+const StateInGdudCard = (props) => {
     const rekemData = countRekemValidAndInvalid(props.rekemList);
 
     const boxSX = {
@@ -36,4 +36,4 @@ const GdudSummaryCard = (props) => {
 };
 
 
-export default GdudSummaryCard;
+export default StateInGdudCard;

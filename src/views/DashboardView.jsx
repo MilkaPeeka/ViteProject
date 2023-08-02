@@ -3,11 +3,11 @@ import { SiteContext } from "../contexts/SiteContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom/";
 import mappings from "../mappings";
-import RekemCardGroup from "../components/Dashboard/RekemCardGroup";
 import { Box } from "@mui/material";
-import GdudSummaryCard from "../components/Dashboard/GdudSummaryCard";
-import GdudSummaryGraphCard from "../components/Dashboard/GdudSummaryGraphCard";
-import GeneralRekemStateCard from "../components/Dashboard/GeneralRekemStateCard";
+import StateInGdudCard from "../components/Dashboard/StateInGdudCard";
+import StateInGdudGraphCard from "../components/Dashboard/StateInGdudGraphCard";
+import RekemsInGdudGroupCard from "../components/Dashboard/RekemsInGdudGroupCard";
+import StateInZahalTableCard from "../components/Dashboard/StateInZahalTableCard";
 
 
 const DashboardView = () => {
@@ -42,10 +42,10 @@ const DashboardView = () => {
 
     return (
     <Box sx={boxSX}>
-        <GdudSummaryCard sx={{marginBottom: 5}} rekemList={ctx.rekemList} gdud={ctx.userData.gdud}/>
-        <GdudSummaryGraphCard rekemList = {ctx.rekemList} sx={{marginBottom: 5}} graphHeight={"90vh"} />
-        <RekemCardGroup {...RekemCardGroupProps}/>
-        {ctx.userData.isManager && <GeneralRekemStateCard {...GeneralRekemStateProps} />}
+        <StateInGdudCard sx={{marginBottom: 5}} rekemList={ctx.rekemList} gdud={ctx.userData.gdud}/>
+        <StateInGdudGraphCard rekemList = {ctx.rekemList} sx={{marginBottom: 5}} graphHeight={"90vh"} />
+        <RekemsInGdudGroupCard {...RekemCardGroupProps}/>
+        {ctx.userData.isManager && <StateInZahalTableCard {...GeneralRekemStateProps} />}
     </Box>
     );
 };

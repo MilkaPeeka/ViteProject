@@ -55,7 +55,7 @@ export const transformRekemDataToPercentages = (data) => {
   return transformedData;
 };
 
-
+// gets a an untouched list of rekems and returns the count of valid and invalid
 export const countRekemValidAndInvalid = (rekemList) => {
   const initialCount = { valid: 0, invalid: 0 };
 

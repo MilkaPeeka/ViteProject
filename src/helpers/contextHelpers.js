@@ -1,8 +1,6 @@
 import mappings from "../mappings";
 /*
-A helper function to retrieve the session and user data from the local storage.
-If those keys were found, then we will check that the session is still valid by comparing the cookie date and the session date
-and return the data if it is.
+returns a valid session data stored in localStorage
 */
 export const retrieveContextDataFromStorage = () => {
   const isInDarkMode = localStorage.getItem(mappings.darkMode) === '1';

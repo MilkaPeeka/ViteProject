@@ -8,7 +8,7 @@ props: {
 import { Box } from "@mui/material";
 import GdudGraph from "../Charts/GdudGraph";
 import { groupRekemsByMakat, countRekemValidAndInvalidByMakat, transformRekemDataToPercentages } from "../../helpers/DashboardHelpers";
-const GdudSummaryGraphCard = (props) => {
+const StateInGdudGraphCard = (props) => {
     const {rekemList} = props;
     const rekemsGroupedByMakat = groupRekemsByMakat(rekemList);
     const rekemsValidAndInvalid = countRekemValidAndInvalidByMakat(rekemsGroupedByMakat);
@@ -31,4 +31,4 @@ const GdudSummaryGraphCard = (props) => {
 };
 
 
-export default GdudSummaryGraphCard;
+export default StateInGdudGraphCard;

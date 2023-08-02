@@ -10,7 +10,7 @@ import { countRekemValidAndInvalidByMakat, groupRekemsByMakat } from "../../help
 import RekemCard from "./RekemCard";
 import { useState } from "react";
 
-const RekemCardGroup = (props) => {
+const RekemsInGdudGroupCard = (props) => {
     const {rekemList} = props;
     const [rekemQuery, setRekemQuery] = useState('');
     let filteredRekems;
@@ -96,4 +96,4 @@ const RekemCardGroup = (props) => {
 
 };
 
-export default RekemCardGroup;
+export default RekemsInGdudGroupCard;

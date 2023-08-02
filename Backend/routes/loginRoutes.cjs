@@ -7,17 +7,17 @@ const router = express.Router();
   router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
-        return res.status(500).json({ error: true, error_message: 'Internal server error ' + err.message });
+        return res.json({ error: true, error_message: 'Internal server error ' + err.message });
       }
       if (!user) {
         return res.json({ error: true, error_message: 'משתמש הכניס מזהה לא נכון' });
       }
       req.logIn(user, (err) => {
         if (err) {
-          return res.status(500).json({ error_message: 'Login failed' });
+          return res.json({ error_message: 'Login failed' });
         }
   
-        return res.status(200).json({ error: false, message: 'Login successful', user, sessionExpiry: new Date(new Date().getTime() + 24 * 60 * 60 * 1000) });
+        return res.json({ error: false, message: 'Login successful', user, sessionExpiry: new Date(new Date().getTime() + 24 * 60 * 60 * 1000) });
       });
     })(req, res, next);
   });

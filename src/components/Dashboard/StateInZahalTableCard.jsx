@@ -8,10 +8,10 @@ props = {
 */
 import {Box, Button, CircularProgress, TextField, Typography} from "@mui/material"
 import RekemTable from "./RekemTable";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { SiteContext } from "../../contexts/SiteContext";
 
-const GeneralRekemStateCard = (props) => {
+const StateInZahalTableCard = (props) => {
 
     const searchRef = useRef('');
     const ctx = useContext(SiteContext);
@@ -86,4 +86,4 @@ const GeneralRekemStateCard = (props) => {
     
 };
 
-export default GeneralRekemStateCard;
+export default StateInZahalTableCard;
