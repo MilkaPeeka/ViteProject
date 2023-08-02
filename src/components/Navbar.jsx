@@ -23,17 +23,25 @@ const Navbar = () => {
         ctx.onLogOutHandler()
         .then(() => setLoadingLoggingOut(false))
         .catch(err => console.log(err));
-    }
+    };
 
-    // console.log("navbar rerender");
+    const rightButtonsSX = {
+        color: ctx.isInDarkMode? "primary.light" : 'white',
+        "&.active": {
+            color: "primary",
+            backgroundColor: ctx.isInDarkMode? "background.paper" : 'primary.light'
+        }
+    };
+
+    const leftButtonsSX = {color: ctx.isInDarkMode ? 'primary.main' : 'white'};
+
 
     const darkModeButtonGroup = (
         <ToggleButtonGroup value={alignment} exclusive onChange={handleChange} aria-label="set dark mode">
-            <ToggleButton value="sun"><WbSunnyIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}} /></ToggleButton>
-            <ToggleButton value="moon"><ModeNightIcon sx={{color: ctx.isInDarkMode ? 'primary.main' : 'white'}}/></ToggleButton>
+            <ToggleButton value="sun"><WbSunnyIcon sx={leftButtonsSX} /></ToggleButton>
+            <ToggleButton value="moon"><ModeNightIcon sx={leftButtonsSX}/></ToggleButton>
         </ToggleButtonGroup>
     );
-
 
     const LeftButtonGroup = (
         <Box display="flex" flexDirection="row">
@@ -45,14 +53,6 @@ const Navbar = () => {
 
       );
 
-      
-    const rightButtonsSX = {
-        color: ctx.isInDarkMode? "primary.light" : 'white',
-        "&.active": {
-            color: "primary",
-            backgroundColor: "background.paper"
-        }
-    };
 
     const RightButtonGroup = (
         <Box>
