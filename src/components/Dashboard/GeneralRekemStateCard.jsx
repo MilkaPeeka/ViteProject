@@ -8,10 +8,17 @@ props = {
 */
 import {Box, Button, CircularProgress, TextField, Typography} from "@mui/material"
 import RekemTable from "./RekemTable";
-import { useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { SiteContext } from "../../contexts/SiteContext";
 
 const GeneralRekemStateCard = (props) => {
+
     const searchRef = useRef('');
+    const ctx = useContext(SiteContext);
+    const [queryRekemList, setQueryRekemList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+
     const headerSX = {
         display: 'flex',
         flexDirection: 'row',
@@ -23,9 +30,22 @@ const GeneralRekemStateCard = (props) => {
 
     };
 
+    const boxSX = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
+        borderRadius: 10,
+        ...props.sx
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.setGdudQuery(searchRef.current.value);
+        setIsLoading(true);
+        ctx.getRekemListByGdud(searchRef.current.value)
+        .then((result) => setQueryRekemList(result))
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
     }
     const RekemGroupHeader = (
         <Box sx={headerSX}>
@@ -44,31 +64,22 @@ const GeneralRekemStateCard = (props) => {
         </Box>
     );
 
-    const boxSX = {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
-        borderRadius: 10,
-        ...props.sx
-    };
 
-    const isTouched = searchRef.current.value === '';
-    const isEmptyQuery = searchRef.current.value !== '' && props.rekemList.length === 0;
+    const wasNotTouched = searchRef.current.value === '';
+    const isEmptyQuery = searchRef.current.value !== '' && queryRekemList.length === 0;
 
     return (
         <Box sx={boxSX}>
             {RekemGroupHeader}
-            {props.isLoading ? <CircularProgress color="primary" /> 
+            {isLoading ? <CircularProgress color="primary" /> 
             :
             isEmptyQuery ? 
             <Typography variant="h5" textAlign="center" padding={4}>אין רקמים בגדוד זה. לחילופין וודא שהכנסת מספר גדוד נכון</Typography>
             :
-            isTouched ? 
+            wasNotTouched ? 
             <Typography variant="h5" textAlign="center" padding={4}>הקלד מספר גדוד ולאחר מכן חפש על מנת להציג רקמים</Typography>
             :
-            <RekemTable rekemList = {props.rekemList} sx={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30, width: '100%'}} />
+            <RekemTable rekemList = {queryRekemList} sx={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30, width: '100%'}} />
             }
         </Box>
     );

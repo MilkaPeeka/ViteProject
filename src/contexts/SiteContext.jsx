@@ -76,7 +76,7 @@ export const SiteContext = createContext({
 const SiteContextProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, reducerInitialData);
     const [rekemList, setRekemList] = useState([]);
-
+    
 
     /*
     loading rekemList on site's load. data is not persistent throughout reloads
@@ -85,11 +85,10 @@ const SiteContextProvider = (props) => {
         if (!state.sessionData.isLoggedIn){
             return;
         }
-
-        console.log("initial site load - loaded rekemList")
-        getRekemsOfUser()
-        .then((result) => setRekemList(result))
-        .catch((err) => console.log(err));
+    console.log("initial site load - loaded rekemList")
+    getRekemsOfUser()
+    .then((result) => setRekemList(result))
+    .catch((err) => console.log(err));
     }, [state.sessionData.isLoggedIn]);
     /*
     tries to log in using by pernum and creates a session on success
