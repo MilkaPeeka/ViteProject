@@ -16,6 +16,7 @@ const defaultSessionData = {
     sessionExpiryDate: null,
 };
 
+
 /*
 NOTE: We don't save or retireve any data from the database until we are sure that the user is authenticated. 
 Because we are not sure that the session is still valid and user is authenticated (as the user can change the cookies locally),
@@ -80,8 +81,9 @@ const SiteContextProvider = (props) => {
     loading rekemList on site's load. data is not persistent throughout reloads
     */
     useEffect(() => {
-        if (!state.sessionData.isLoggedIn)
+        if (!state.sessionData.isLoggedIn){
             return;
+        }
 
         console.log("initial site load - loaded rekemList")
         getRekemsByGdud()
@@ -109,6 +111,7 @@ const SiteContextProvider = (props) => {
             sessionExpiryDate: result.sessionExpiry 
         };
 
+        setRekemList([]);
         dispatch({type: mappings.setUserData, value: userData});
         dispatch({type: mappings.setSessionData, value: sessionData});
         localStorage.setItem(mappings.sessionData, JSON.stringify(sessionData));

@@ -47,11 +47,10 @@ const RekemForm = (props) => {
     
     const formSX = {
         display: 'flex',
+        flex: 1,
         flexDirection: 'column',
         padding: 2,
         borderRadius: 6,
-        flexBasis: 0, 
-        flexGrow: 1,
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
     };
 

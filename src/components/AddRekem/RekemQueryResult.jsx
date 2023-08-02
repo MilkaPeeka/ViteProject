@@ -29,15 +29,12 @@ const RekemQueryResult = (props) => {
     const boxSX = {
         bgcolor: props.isRekemFound ? 'success.light' : 'error.light',
         color: "background.default",
-        borderRadius: 6,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        borderRadius: 6,
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
-        paddingY: 3,
-        flexBasis: 0, 
-        flexGrow: 1,
         ...props.sx,
     };
 
@@ -49,9 +46,11 @@ const RekemQueryResult = (props) => {
         justifyContent: 'center',
         color: 'text.primary',
         paddingY: 1,
+        margin: 0,
+        maxWidth: "80%",
         paddingX: 10,
         marginTop: 1,
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', // Optional shadow effect
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.)', // Optional shadow effect
     };
 
 

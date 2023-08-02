@@ -54,13 +54,14 @@ const GdudGraph = (props) => {
 
     const options = {
       normalized: true, 
+      maintainAspectRatio: false,
       animations: false, 
       // parsing: false,
       plugins: 
         {legend: {display: false}}};
     return (
         <Box
-        sx={props.sx}>
+        sx={{height: props.graphHeight}}>
           <Bar redraw={true} data={data} options={options}/>
         </Box>
       );

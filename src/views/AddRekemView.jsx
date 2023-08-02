@@ -28,8 +28,7 @@ const AddRekemView = () => {
         setErrorMessage('');
         ctx.addRekemHandler(rekemData)
         .then(() => {
-            ctx.getRekemList();
-            console.log("updaed rekem list");
+            ctx.getRekemList().then(() => console.log("updaed rekem list"));
         })
         .catch((err) => setErrorMessage(err.message))
         .finally(() => setIsLoading(false));
@@ -46,20 +45,18 @@ const AddRekemView = () => {
         submitHandler,
         isLoading,
         errorMessage,
-
         sx: {
-            marginX: 9
+            marginLeft: 7,
+            flexBasis: 0,
+            flexGrow: 1
         }
-        
     };
 
     const boxSX = {
         display: 'flex',
         flexDirection: 'row',
-        marginX: 9,
+        marginX: 15,
         marginTop: 10,
-        flexGrow: 1,
-        flexBasis: 0,
     };
 
     return (

@@ -36,7 +36,7 @@ const DashboardView = () => {
     return (
     <Box sx={boxSX}>
         <GdudSummaryCard sx={{marginBottom: 5}} rekemList={rekemList} gdud={ctx.userData.gdud}/>
-        <GdudSummaryGraphCard rekemList = {rekemList} sx={{marginBottom: 5}} />
+        <GdudSummaryGraphCard rekemList = {rekemList} sx={{marginBottom: 5}} graphHeight={"90vh"} />
         <RekemCardGroup {...props}/>
     </Box>
     );
