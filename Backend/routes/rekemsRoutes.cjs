@@ -10,7 +10,16 @@ router.get('/get_of_user', authenticateMiddleware, async (req, res) => {
       gdud: req.user.gdud,
     });
 
-    res.json({ error: false, results: queryResult });
+    res.json({
+      error: false,
+      results: queryResult.map((item) => ({
+        gdud: item.gdud,
+        kshirot: item.kshirot,
+        makat: item.makat,
+        carNumber: item.carNumber,
+      })),
+    });
+  
   } catch (error) {
     res.json({ error: true, error_msg: error.message });
   }
@@ -23,7 +32,16 @@ router.get('/get_by_gdud/:gdud', authenticateMiddleware, async (req, res) => {
       gdud: req.params.gdud,
     });
 
-    res.json({ error: false, results: queryResult });
+    res.json({
+      error: false,
+      results: queryResult.map((item) => ({
+        gdud: item.gdud,
+        kshirot: item.kshirot,
+        makat: item.makat,
+        carNumber: item.carNumber,
+      })),
+    });
+  
   } catch (error) {
     res.json({ error: true, error_msg: error.message });
   }

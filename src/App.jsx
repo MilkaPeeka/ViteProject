@@ -13,7 +13,6 @@ import DevView from "./views/DevView";
 const router = createBrowserRouter([
   // Add a new Route for redirecting from '/' to '/dashboard'
   { path: '/', element: <Navigate to={mappings.dashboardPath} /> },
-
   // The existing routes
   {
     path: '/',
