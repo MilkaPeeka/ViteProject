@@ -1,0 +1,14 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Backend.Dockerfile
+    ports:
+      - '3001:3001'
+  frontend:
+    build:
+      context: .
+      dockerfile: Frontend.Dockerfile
+    ports:
+      - '9005:9005'
