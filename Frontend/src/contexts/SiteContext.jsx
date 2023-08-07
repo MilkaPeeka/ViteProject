@@ -1,5 +1,5 @@
-import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud, getRekemsOfUser} from '../api/database';
-import { createContext, useEffect, useReducer, useState } from 'react';
+import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud, getSummarizedRekemsOfUser} from '../api/database';
+import { createContext, useEffect, useReducer } from 'react';
 import {retrieveContextDataFromStorage} from '../helpers/contextHelpers'
 import mappings from '../mappings';
 
@@ -21,7 +21,7 @@ const reducerInitialState = {
     userData: defaultUserData,
     isInDarkMode: false,
     ...retrieveContextDataFromStorage(),
-    rekemList: []
+    summarizedRekemList: []
 };
 
 
@@ -52,10 +52,10 @@ const reducer = (state, action) => {
                 isInDarkMode: action.value
             };
 
-        case mappings.setRekemList:
+        case mappings.setSummarizedRekemList:
             return {
                 ...state,
-                rekemList: action.value
+                summarizedRekemList: action.value
             };
 
         default:
@@ -68,12 +68,11 @@ const reducer = (state, action) => {
 //// SITE CONTEXT ////
 export const SiteContext = createContext({
     ...reducerInitialState,
-    rekemList: [],
     toggleDarkmode: async () => {},
     onLogOutHandler: async () => {},
     onLogInHandler: async (pernum) => {},
     addRekemHandler: async (rekemData) => {}, 
-    getRekemList: async () => {},
+    getSummarizedRekemList: async () => {},
     getRekemListByGdud: async (gdud) => {}
 });
 
@@ -89,8 +88,8 @@ const SiteContextProvider = (props) => {
             return;
         }
     console.log("initial site load - loaded rekemList")
-    getRekemsOfUser()
-    .then((result) => dispatch({type: mappings.setRekemList, value:result}))
+    getSummarizedRekemsOfUser()
+    .then((result) => dispatch({type: mappings.setSummarizedRekemList, value:result}))
     .catch((err) => console.log(err));
     }, [state.sessionData.isLoggedIn]);
     /*
@@ -145,12 +144,12 @@ const SiteContextProvider = (props) => {
         dispatch({type: mappings.toggleDarkMode});
     };
     
-    const getRekemList = async () => {
-        const result = await getRekemsOfUser();
+    const getSummarizedRekemList = async () => {
+        const result = await getSummarizedRekemsOfUser();
         if (result.error)
             throw new Error(result.error_message);
             
-        dispatch({type: mappings.setRekemList, value:result});
+        dispatch({type: mappings.setSummarizedRekemList, value:result});
     };
 
     const getRekemListByGdud = async (gdud) => {
@@ -180,7 +179,7 @@ const SiteContextProvider = (props) => {
             onLogOutHandler,
             onLogInHandler,
             addRekemHandler,
-            getRekemList,
+            getSummarizedRekemList,
             getRekemListByGdud
         }}>
             {props.children}

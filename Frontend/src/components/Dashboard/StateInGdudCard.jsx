@@ -1,7 +1,7 @@
 /*
 props: {
     gdud: number,
-    rekemList,
+    summarizedRekemList (makat, valid, invalid),
     sx: JSON (optional)
 }
 */
@@ -10,7 +10,7 @@ import { countRekemValidAndInvalid } from "../../helpers/DashboardHelpers";
 import RekemDoughnut from "../Charts/RekemDoughnut";
 import { Box, Typography } from "@mui/material";
 const StateInGdudCard = (props) => {
-    const rekemData = countRekemValidAndInvalid(props.rekemList);
+    const rekemData = countRekemValidAndInvalid(props.summarizedRekemList);
 
     const boxSX = {
         display: 'flex',

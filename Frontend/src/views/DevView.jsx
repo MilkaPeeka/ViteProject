@@ -7,7 +7,7 @@ const DevView = () => {
     <>
     <button onClick={ctx.toggleDarkmode}>setDarkMode</button>
     <button onClick={() => ctx.onLogInHandler("2979")}>load userData 2979</button>
-    <button onClick={ctx.getRekemList}>load rekemList</button>
+    <button onClick={ctx.getSummarizedRekemList}>load rekemList</button>
     <pre>ctx: {JSON.stringify(ctx,undefined, 2)}</pre>
 
     </>

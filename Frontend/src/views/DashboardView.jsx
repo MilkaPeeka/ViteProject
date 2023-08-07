@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SiteContext } from "../contexts/SiteContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom/";
@@ -31,7 +31,7 @@ const DashboardView = () => {
     };
 
     const RekemCardGroupProps = {
-        rekemList: ctx.rekemList,
+        summarizedRekemList: ctx.summarizedRekemList,
         width: 200,
         height: 250
     };
@@ -40,10 +40,22 @@ const DashboardView = () => {
         sx: {marginTop: 5},
     };
 
+    const stateInGdudCardProps = {
+        sx: {marginBottom: 5},
+        summarizedRekemList: ctx.summarizedRekemList,
+        gdud: ctx.userData.gdud
+    };
+
+    const stateInGdudGraphProps = {
+        summarizedRekemList: ctx.summarizedRekemList,
+        sx: {marginBottom: 5},
+        graphHeight: "90vh" 
+    };
+
     return (
     <Box sx={boxSX}>
-        <StateInGdudCard sx={{marginBottom: 5}} rekemList={ctx.rekemList} gdud={ctx.userData.gdud}/>
-        <StateInGdudGraphCard rekemList = {ctx.rekemList} sx={{marginBottom: 5}} graphHeight={"90vh"} />
+        <StateInGdudCard {...stateInGdudCardProps}/>
+        <StateInGdudGraphCard {...stateInGdudGraphProps} />
         <RekemsInGdudGroupCard {...RekemCardGroupProps}/>
         {ctx.userData.isManager && <StateInZahalTableCard {...GeneralRekemStateProps} />}
     </Box>

@@ -10,7 +10,7 @@ export default defineConfig({
       usePolling: true,
     },
     proxy: {
-      '/api': 'http://backend:3001/'
+      '/api': 'http://0.0.0.0:3001/'
     },
 
     host: true,

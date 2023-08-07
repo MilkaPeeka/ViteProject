@@ -1,18 +1,15 @@
 /*
 props: {
-    rekemList,
+    summarizedRekemList(valid, invalid, makat),
     sx: JSON (optional)
 }
 */
 
 import { Box } from "@mui/material";
+import { transformRekemDataToPercentages } from "../../helpers/DashboardHelpers";
 import GdudGraph from "../Charts/GdudGraph";
-import { groupRekemsByMakat, countRekemValidAndInvalidByMakat, transformRekemDataToPercentages } from "../../helpers/DashboardHelpers";
 const StateInGdudGraphCard = (props) => {
-    const {rekemList} = props;
-    const rekemsGroupedByMakat = groupRekemsByMakat(rekemList);
-    const rekemsValidAndInvalid = countRekemValidAndInvalidByMakat(rekemsGroupedByMakat);
-    const data = transformRekemDataToPercentages(rekemsValidAndInvalid);
+    const data = transformRekemDataToPercentages(props.summarizedRekemList);
     const boxSX = {
         paddingX: 2,
         paddingY: 3,

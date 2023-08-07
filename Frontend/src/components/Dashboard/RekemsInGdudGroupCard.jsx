@@ -1,26 +1,26 @@
 /*
 props= {
-    rekemList: list
+    summarizedRekemList: (valid, invalid, makat)
     width: number,
     height: number
 }
 */
 import { Box, TextField, Typography } from "@mui/material";
-import { countRekemValidAndInvalidByMakat, groupRekemsByMakat } from "../../helpers/DashboardHelpers";
 import RekemCard from "./RekemCard";
 import { useState } from "react";
 
 const RekemsInGdudGroupCard = (props) => {
-    const {rekemList} = props;
+    const summarizedRekemList = props.summarizedRekemList;
     const [rekemQuery, setRekemQuery] = useState('');
     let filteredRekems;
     if (rekemQuery === '')
-        filteredRekems = rekemList;
+        filteredRekems = summarizedRekemList;
     else
-        filteredRekems = rekemList.filter(item => item.makat.startsWith(rekemQuery));
-    const groupedRekems = groupRekemsByMakat(filteredRekems);
+        filteredRekems = summarizedRekemList.filter(item => item.makat.startsWith(rekemQuery));
+
+    // const groupedRekems = groupRekemsByMakat(filteredRekems);
     
-    const groupedRekemsKshirotCount = countRekemValidAndInvalidByMakat(groupedRekems);
+    // const groupedRekemsKshirotCount = countRekemValidAndInvalidByMakat(groupedRekems);
 
     const onChangeHandler = (event) => setRekemQuery(event.target.value);
 
@@ -66,7 +66,7 @@ const RekemsInGdudGroupCard = (props) => {
 
     const ScrollableRekemList = (
         <Box sx={scrollableBoxSX}>
-            {groupedRekemsKshirotCount.map((item) =>
+            {filteredRekems.map((item) =>
             <RekemCard {...rekemCardStyleProps} makat={item.makat} key={item.makat} valid={item.valid} invalid={item.invalid}/>)}
         </Box>
     );
