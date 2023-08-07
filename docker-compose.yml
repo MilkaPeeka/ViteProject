@@ -6,9 +6,14 @@ services:
       dockerfile: Backend.Dockerfile
     ports:
       - '3001:3001'
+    environment:
+      - onDocker=true # Add the environment variable here
+
   frontend:
     build:
       context: .
       dockerfile: Frontend.Dockerfile
     ports:
       - '9005:9005'
+    environment:
+      - onDocker=true # Add the environment variable here
