@@ -1,11 +1,11 @@
 import RekemQueryResult from "../components/AddRekem/RekemQueryResult";
 import RekemForm from "../components/AddRekem/RekemForm";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {SiteContext} from "../contexts/SiteContext"
-import { Box, Typography } from "@mui/material";
-import { reduceRekemListIntoData } from "../helpers/RekemQueryHelpers";
+import { Box } from "@mui/material";
 import mappings from "../mappings";
 import { useNavigate } from "react-router-dom/dist";
+
 const AddRekemView = () => {    
     const ctx = useContext(SiteContext);
     const navigate = useNavigate();
@@ -13,7 +13,6 @@ const AddRekemView = () => {
     const [currentMakat, setCurrentMakat] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const rekemList = ctx.rekemList;
 
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
@@ -28,7 +27,7 @@ const AddRekemView = () => {
         setErrorMessage('');
         ctx.addRekemHandler(rekemData)
         .then(() => {
-            ctx.getRekemList().then(() => console.log("updaed rekem list"));
+            ctx.getSummarizedRekemList().then(() => console.log("updaed summarized rekem list"));
         })
         .catch((err) => setErrorMessage(err.message))
         .finally(() => setIsLoading(false));
@@ -36,7 +35,7 @@ const AddRekemView = () => {
     };
 
     const props = {
-        ...reduceRekemListIntoData(rekemList, currentMakat),
+        summarizedRekemList: ctx.summarizedRekemList,
         gdud: ctx.userData.gdud,
         setNewRekemConfirmation,
         newRekemConfirmed,
