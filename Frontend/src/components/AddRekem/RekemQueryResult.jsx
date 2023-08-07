@@ -26,11 +26,8 @@ const RekemQueryResult = (props) => {
     }, [props.isLoading]);
 
 
-    const filteredRekem = props.summarizedRekemList.find(item => item.makat == props.currentMakat);
-    const isRekemFound = filteredRekem != undefined;
-
     const boxSX = {
-        bgcolor: isRekemFound ? 'success.light' : 'error.light',
+        bgcolor: props.isRekemFound ? 'success.light' : 'error.light',
         color: "background.default",
         display: "flex",
         flexDirection: "column",
@@ -67,13 +64,13 @@ const RekemQueryResult = (props) => {
     }
 
     const displayData = (
-        isRekemFound? 
+        props.isRekemFound? 
         <>
             <Typography variant="h5">רקמ נמצא בגדוד!</Typography>
-            <LabelValueTypography label="מקט" value={filteredRekem.makat} />
-            <LabelValueTypography label="תקינים" value={filteredRekem.valid} />
-            <LabelValueTypography label="לא תקינים" value={filteredRekem.invalid} />
-            <LabelValueTypography label="אחוזי תקינות הרקמ בגדוד" value={Math.round(100 * filteredRekem.valid / (filteredRekem.valid + filteredRekem.invalid)) + "%"} />
+            <LabelValueTypography label="מקט" value={props.filteredRekem.makat} />
+            <LabelValueTypography label="תקינים" value={props.filteredRekem.valid} />
+            <LabelValueTypography label="לא תקינים" value={props.filteredRekem.invalid} />
+            <LabelValueTypography label="אחוזי תקינות הרקמ בגדוד" value={Math.round(100 * props.filteredRekem.valid / (props.filteredRekem.valid + props.filteredRekem.invalid)) + "%"} />
         </>
         :
         <>

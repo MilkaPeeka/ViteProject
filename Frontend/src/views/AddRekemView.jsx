@@ -14,6 +14,10 @@ const AddRekemView = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
+    const filteredRekem = ctx.summarizedRekemList.find(item => item.makat == currentMakat);
+    const isRekemFound = filteredRekem != undefined;
+
+
     useEffect(() => {
         if (!ctx.sessionData.isLoggedIn)
             return navigate(mappings.signInPath);
@@ -35,7 +39,8 @@ const AddRekemView = () => {
     };
 
     const props = {
-        summarizedRekemList: ctx.summarizedRekemList,
+        filteredRekem,
+        isRekemFound,
         gdud: ctx.userData.gdud,
         setNewRekemConfirmation,
         newRekemConfirmed,
