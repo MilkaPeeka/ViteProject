@@ -2,13 +2,14 @@ import { useEffect, useContext } from "react";
 import { SiteContext } from "../contexts/SiteContext";
 import { useNavigate } from "react-router-dom/";
 import mappings from "../mappings";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 import StateInGdudGraphCard from "../components/Dashboard/StateInGdudGraphCard";
 import RekemsInGdudGroupCard from "../components/Dashboard/RekemsInGdudGroupCard";
 import StateInZahalTableCard from "../components/Dashboard/StateInZahalTableCard";
 import StatusCard from "../components/Dashboard/StatusCard";
 import { countRekemValidAndInvalid, getBestValidInvalidRatioRekem, getWorstValidInvalidRatioRekem } from "../helpers/DashboardHelpers";
+import DisplayCard from "../components/DisplayCard";
 
 const DashboardView = () => {
     const ctx = useContext(SiteContext);
@@ -63,14 +64,48 @@ const DashboardView = () => {
         height: '90vh',
     };
     return (
-        <Box sx={boxSX}>
-            <StatusCard {...statusInGdudData} sx={{gridColumn: 'span 2', gridRow: 'span 2'}}/>
-            <StatusCard {...bestRekemInGdudData} sx={{gridColumn: 'span 2', gridRow: 'span 2'}}/>
-            <StatusCard {...worstRekemInGdudData} sx={{gridColumn: 'span 2', gridRow: 'span 2'}}/>
-            <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{gridColumn: 'span 5', gridRow: ctx.userData.isManager ? 'span 5' : 'span 10'}}/>
-            <StateInGdudGraphCard summarizedRekemList = {ctx.summarizedRekemList} sx={{gridColumn: 'span 6', gridRow: 'span 8'}} />
-            {ctx.userData.isManager && <StateInZahalTableCard sx={{gridColumn: 'span 5', gridRow: 'span 5'}}/>}
-        </Box>
+        // <Box sx={boxSX}>
+
+        //     <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{gridColumn: 'span 5', gridRow: ctx.userData.isManager ? 'span 5' : 'span 10'}}/>
+        //     <StateInGdudGraphCard summarizedRekemList = {ctx.summarizedRekemList} sx={{gridColumn: 'span 6', gridRow: 'span 8'}} />
+        //     {ctx.userData.isManager && <StateInZahalTableCard sx={{gridColumn: 'span 5', gridRow: 'span 5'}}/>}
+        // </Box>
+
+        <Grid container height='93vh'>
+            <Grid item container sm={12} lg={7}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%'
+                }}>
+                    <Grid item container sx={{height: '20%'}}>
+                        <Grid item xs={4}>
+                            <StatusCard {...statusInGdudData} />
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <StatusCard {...bestRekemInGdudData} />
+                        </Grid>
+
+                        <Grid item xs={4}>
+                            <StatusCard {...worstRekemInGdudData} />
+                        </Grid>
+                    </Grid>
+
+                    <StateInGdudGraphCard summarizedRekemList = {ctx.summarizedRekemList} sx={{height: '80%'}}/>
+                </Box>
+            </Grid>
+            <Grid item sm={12} lg={5} height='100%' width='100%'>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%'
+                }}>
+                <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{height: '55%'}}/>
+                {ctx.userData.isManager && <StateInZahalTableCard sx={{height: '45%'}} />}
+                </Box>
+            </Grid>
+        </Grid>
     );
 };
 
