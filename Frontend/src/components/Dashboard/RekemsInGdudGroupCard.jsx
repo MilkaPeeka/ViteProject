@@ -18,17 +18,13 @@ const RekemsInGdudGroupCard = (props) => {
     else
         filteredRekems = summarizedRekemList.filter(item => item.makat.startsWith(rekemQuery));
 
-    // const groupedRekems = groupRekemsByMakat(filteredRekems);
-    
-    // const groupedRekemsKshirotCount = countRekemValidAndInvalidByMakat(groupedRekems);
-
     const onChangeHandler = (event) => setRekemQuery(event.target.value);
 
     
     const rekemCardStyleProps = {
         width: 200,
         height: 250,
-        margin: 2
+        margin: 1
     };
 
 

@@ -77,7 +77,7 @@ const StateInZahalTableCard = (props) => {
             wasNotTouched ? 
             <Typography variant="h5" sx={{p: 4, textAlign: "center"}}>הקלד מספר גדוד ולאחר מכן חפש על מנת להציג רקמים</Typography>
             :
-            <RekemTable rekemList = {queryRekemList} sx={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30, width: '100%'}} />
+            <RekemTable gdud={searchRef.current.value} rekemList = {queryRekemList} sx={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30, width: '100%'}} />
             }
         </Box>
     );

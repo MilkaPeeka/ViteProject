@@ -1,6 +1,7 @@
 /*
 props: {
     rekemList,
+    gdud
     sx
 }
 */
@@ -36,9 +37,8 @@ const RekemTable = (props) => {
     const boxSX = {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'start',
-        bgcolor: 'pink',
         width: '100%',
+        overflowY: 'hidden',
         ...props.sx
     };
 
@@ -51,7 +51,7 @@ const RekemTable = (props) => {
               "&:last-child td, &:last-child th": { border: 0 },
             }}
           >
-            <TableCell>{item.gdud}</TableCell>
+            <TableCell>{props.gdud}</TableCell>
             <TableCell>{item.makat}</TableCell>
             <TableCell>{item.carNumber}</TableCell>
             <TableCell>{item.kshirot ? 'תקין' : 'תקול'}</TableCell>
@@ -73,7 +73,7 @@ const RekemTable = (props) => {
 
     const TablePaginationData = (
         <TablePagination
-        sx={{padding: 0, overflowY: 'hidden'}}
+        style={{maxHeight: '11%'}}
         rowsPerPageOptions={[10, 15, 25]}
         component="div"
         count={props.rekemList.length}
@@ -90,7 +90,7 @@ const RekemTable = (props) => {
 
     return (
         <Box sx={boxSX}>
-          <TableContainer component={Box}>
+          <TableContainer style={{maxHeight: '89%'}}>
             <Table aria-label="general rekems for all of zahal" stickyHeader>
                 {TableHeadBody}
                 {TableBodyData}

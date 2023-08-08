@@ -3,7 +3,7 @@ import { SiteContext } from "../contexts/SiteContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom/";
 import mappings from "../mappings";
-import { Box, Paper, makeStyles } from "@mui/material";
+import { Box, LinearProgress, Paper, makeStyles } from "@mui/material";
 import StateInGdudCard from "../components/Dashboard/StateInGdudCard";
 import StateInGdudGraphCard from "../components/Dashboard/StateInGdudGraphCard";
 import RekemsInGdudGroupCard from "../components/Dashboard/RekemsInGdudGroupCard";
@@ -31,8 +31,6 @@ const DashboardView = () => {
 
     const RekemCardGroupProps = {
         summarizedRekemList: ctx.summarizedRekemList,
-        width: 200,
-        height: 250
     };
 
 
@@ -76,6 +74,7 @@ const DashboardView = () => {
             </Paper>
             <Paper sx={{bgcolor: "salmon", gridColumn: 'span 2', gridRow: 'span 2'}}>
                 רקם הכי פחות מוצלח
+                <LinearProgress variant="buffer" value={90} />
             </Paper>
 
             <RekemsInGdudGroupCard {...RekemCardGroupProps} sx={{gridColumn: 'span 5', gridRow: 'span 5'}}/>
