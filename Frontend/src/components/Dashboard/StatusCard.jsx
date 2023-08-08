@@ -19,7 +19,7 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: 3,
+        padding: 1.8,
         height: '100%',
         ...sx
     };
@@ -41,8 +41,8 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
     const CardHeader = ({mainHeader, subHeader}) => {
         return (
         <Box>
-            <Typography color="text.secondary" variant="h5" >{mainHeader}</Typography>
-            <Typography fontWeight="bold" variant="h4">{subHeader}</Typography>
+            <Typography color="text.secondary" variant="body1" >{mainHeader}</Typography>
+            <Typography fontWeight="bold" variant="h5">{subHeader}</Typography>
         </Box>
         );
     };
@@ -50,8 +50,8 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
     const CardData = ({mainHeader, subHeader}) => {
         return (
             <Box sx={cardDataSX}>
-                <Typography fontWeight="bold" variant="h4">{mainHeader}</Typography>
-                <Typography fontWeight="medium" variant="body1" color="text.secondary">{subHeader}</Typography>
+                <Typography fontWeight="bold" variant="body1">{mainHeader}</Typography>
+                <Typography fontWeight="medium" variant="body2" color="text.secondary">{subHeader}</Typography>
             </Box>
         );
     };

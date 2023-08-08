@@ -63,8 +63,7 @@ const Navbar = () => {
     );
 
     return (
-        <>
-        <AppBar position="static">
+        <AppBar position="static" sx={{maxHeight: '10vh'}}>
             <Toolbar>
                 <Box display="flex" justifyContent="space-between" flexGrow={1} marginX="10%">
                     {RightButtonGroup}
@@ -72,7 +71,6 @@ const Navbar = () => {
                 </Box>
             </Toolbar>
         </AppBar>
-        </>
     );
 };
 

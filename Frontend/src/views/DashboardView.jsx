@@ -59,8 +59,8 @@ const DashboardView = () => {
         gridTemplateRows: 'repeat(10, 1fr)',
         gridTemplateColumns: 'repeat(11, 1fr)',
         gap: 3,
-        padding: 5,
-        height: '95vh',
+        padding: 2,
+        height: '90vh',
     };
     return (
         <Box sx={boxSX}>
