@@ -55,40 +55,26 @@ const DashboardView = () => {
     };
 
 
-    const boxSX = {
-        display: 'grid',
-        gridTemplateRows: 'repeat(10, 1fr)',
-        gridTemplateColumns: 'repeat(11, 1fr)',
-        gap: 3,
-        padding: 2,
-        height: '90vh',
-    };
+
     return (
-        // <Box sx={boxSX}>
-
-        //     <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{gridColumn: 'span 5', gridRow: ctx.userData.isManager ? 'span 5' : 'span 10'}}/>
-        //     <StateInGdudGraphCard summarizedRekemList = {ctx.summarizedRekemList} sx={{gridColumn: 'span 6', gridRow: 'span 8'}} />
-        //     {ctx.userData.isManager && <StateInZahalTableCard sx={{gridColumn: 'span 5', gridRow: 'span 5'}}/>}
-        // </Box>
-
-        <Grid container height='93vh'>
+        <Grid container height='93vh' padding={3}>
             <Grid item container sm={12} lg={7}>
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    width: '100%'
+                    width: '100%',
                 }}>
-                    <Grid item container sx={{height: '20%'}}>
+                    <Grid item container sx={{height: '20%'}} mb={3}>
                         <Grid item xs={4}>
-                            <StatusCard {...statusInGdudData} />
+                            <StatusCard {...statusInGdudData} sx={{margin: 1}}/>
                         </Grid>
 
                         <Grid item xs={4}>
-                            <StatusCard {...bestRekemInGdudData} />
+                            <StatusCard {...bestRekemInGdudData} sx={{margin: 1}}/>
                         </Grid>
 
                         <Grid item xs={4}>
-                            <StatusCard {...worstRekemInGdudData} />
+                            <StatusCard {...worstRekemInGdudData} sx={{margin: 1, marginRight: 0}}/>
                         </Grid>
                     </Grid>
 
@@ -99,9 +85,11 @@ const DashboardView = () => {
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    height: '100%'
+                    height: '100%',
+                    padding: 2,
+                    paddingBottom: 0
                 }}>
-                <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{height: '55%'}}/>
+                <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{height: '55%', mb: 2}}/>
                 {ctx.userData.isManager && <StateInZahalTableCard sx={{height: '45%'}} />}
                 </Box>
             </Grid>
