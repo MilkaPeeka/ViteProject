@@ -59,12 +59,7 @@ const GdudGraph = (props) => {
       // parsing: false,
       plugins: 
         {legend: {display: false}}};
-    return (
-        <Box
-        sx={{height: props.graphHeight}}>
-          <Bar redraw={true} data={data} options={options}/>
-        </Box>
-      );
+    return <Bar redraw={true} data={data} options={options}/>;
 
 };
 

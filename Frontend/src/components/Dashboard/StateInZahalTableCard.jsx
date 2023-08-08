@@ -2,7 +2,6 @@
 props = {
     setGdudQuery,
     isLoading,
-    rekemlist,
     sx
 }
 */
@@ -26,17 +25,17 @@ const StateInZahalTableCard = (props) => {
         bgcolor: 'background.paper',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
-        width: '100%'
-
+        width: '100%',
     };
 
     const boxSX = {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'start',
         alignItems: 'center',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
         borderRadius: 6,
+        height: '100%',
         ...props.sx
     };
     const handleSubmit = (event) => {
@@ -46,11 +45,11 @@ const StateInZahalTableCard = (props) => {
         .then((result) => setQueryRekemList(result))
         .catch((err) => console.log(err))
         .finally(() => setIsLoading(false));
-    }
+    };
+
     const RekemGroupHeader = (
         <Box sx={headerSX}>
-            <Typography sx={{marginTop: 4, marginLeft: 4, color: 'primary.light'}} variant="h5">חיפוש לפי גדוד:</Typography>
-            <Box>
+            <Typography sx={{marginTop: 2, marginLeft: 2, color: 'primary.light'}} variant="h5">חיפוש לפי גדוד:</Typography>
                 <form onSubmit={handleSubmit}>
                     <TextField
                     sx={{m: 2,}}
@@ -58,9 +57,8 @@ const StateInZahalTableCard = (props) => {
                     variant="standard"
                     InputLabelProps={{sx: {color: 'primary.light'}}}
                     inputRef={searchRef}/>
-                    <Button type="submit" sx={{marginTop: 4, marginRight: 4}}>חפש</Button>
+                    <Button type="submit" sx={{marginTop: 4}}>חפש</Button>
                 </form>
-            </Box>
         </Box>
     );
 
@@ -74,10 +72,10 @@ const StateInZahalTableCard = (props) => {
             {isLoading ? <CircularProgress color="primary" /> 
             :
             isEmptyQuery ? 
-            <Typography variant="h5" textAlign="center" padding={4}>אין רקמים בגדוד זה. לחילופין וודא שהכנסת מספר גדוד נכון</Typography>
+            <Typography variant="h5" sx={{p: 4, textAlign: "center"}}>אין רקמים בגדוד זה. לחילופין וודא שהכנסת מספר גדוד נכון</Typography>
             :
             wasNotTouched ? 
-            <Typography variant="h5" textAlign="center" padding={4}>הקלד מספר גדוד ולאחר מכן חפש על מנת להציג רקמים</Typography>
+            <Typography variant="h5" sx={{p: 4, textAlign: "center"}}>הקלד מספר גדוד ולאחר מכן חפש על מנת להציג רקמים</Typography>
             :
             <RekemTable rekemList = {queryRekemList} sx={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30, width: '100%'}} />
             }

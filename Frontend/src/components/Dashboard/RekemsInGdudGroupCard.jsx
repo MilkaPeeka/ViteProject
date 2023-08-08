@@ -37,8 +37,7 @@ const RekemsInGdudGroupCard = (props) => {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        height: 600,
-        overflowY: 'auto',
+        overflowY: 'scroll',
         overflowX: 'hidden',
         '&::-webkit-scrollbar': { display: 'none' },
         borderBottomLeftRadius: 40,
@@ -62,6 +61,8 @@ const RekemsInGdudGroupCard = (props) => {
         justifyContent: 'center',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
         borderRadius: 10,
+        height: '100%',
+        ...props.sx
     };
 
     const ScrollableRekemList = (

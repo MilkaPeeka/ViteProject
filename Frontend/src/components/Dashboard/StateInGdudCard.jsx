@@ -8,29 +8,28 @@ props: {
 
 import { countRekemValidAndInvalid } from "../../helpers/DashboardHelpers";
 import RekemDoughnut from "../Charts/RekemDoughnut";
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 const StateInGdudCard = (props) => {
     const rekemData = countRekemValidAndInvalid(props.summarizedRekemList);
 
-    const boxSX = {
+    const paperSX = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingX: 8,
-        paddingY: 3,
-        boxShadow: 3,
-        borderRadius: 10,
         bgcolor: "background.paper",
+        height: '100%',
+        width: '100%',
+        padding: 2,
         ...props.sx
     }
     return (
-    <Box sx={boxSX}>
-        <Box padding={4}>
-            <Typography variant="h3">המצב בגדוד</Typography>
-            <Typography variant="h2" fontWeight="bold">{props.gdud}</Typography>
+    <Paper sx={paperSX}>
+        <Box>
+            <Typography variant="h5">המצב בגדוד</Typography>
+            <Typography variant="h4" fontWeight="bold">{props.gdud}</Typography>
         </Box>
-        <RekemDoughnut {...rekemData} height={250} width = {250}/>
-    </Box>
+        <RekemDoughnut {...rekemData} height={100} width ={100}/>
+    </Paper>
     );
 
 };

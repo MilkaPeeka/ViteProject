@@ -11,7 +11,6 @@ import GdudGraph from "../Charts/GdudGraph";
 const StateInGdudGraphCard = (props) => {
     const data = transformRekemDataToPercentages(props.summarizedRekemList);
     const boxSX = {
-        paddingX: 2,
         paddingY: 3,
         boxShadow: 3,
         borderRadius: 10,
@@ -21,7 +20,7 @@ const StateInGdudGraphCard = (props) => {
 
     return (
     <Box sx={boxSX}>
-        <GdudGraph itemList={data} graphHeight = {props.graphHeight}/>
+        <GdudGraph itemList={data}/>
     </Box>
     );
 

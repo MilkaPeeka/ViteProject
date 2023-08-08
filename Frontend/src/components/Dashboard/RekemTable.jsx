@@ -17,7 +17,7 @@ import { Box, Typography } from "@mui/material";
 
 const RekemTable = (props) => {
     const [pg, setpg] = useState(0);
-    const [rpg, setrpg] = useState(5);
+    const [rpg, setrpg] = useState(10);
   
     const handleChangePage = (event, newpage) => {
         setpg(newpage);
@@ -37,7 +37,8 @@ const RekemTable = (props) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'start',
-        bgcolor: 'background.paper',
+        bgcolor: 'pink',
+        width: '100%',
         ...props.sx
     };
 
@@ -72,7 +73,8 @@ const RekemTable = (props) => {
 
     const TablePaginationData = (
         <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        sx={{padding: 0, overflowY: 'hidden'}}
+        rowsPerPageOptions={[10, 15, 25]}
         component="div"
         count={props.rekemList.length}
         rowsPerPage={rpg}
@@ -89,7 +91,7 @@ const RekemTable = (props) => {
     return (
         <Box sx={boxSX}>
           <TableContainer component={Box}>
-            <Table aria-label="general rekems for all of zahal">
+            <Table aria-label="general rekems for all of zahal" stickyHeader>
                 {TableHeadBody}
                 {TableBodyData}
             </Table>
