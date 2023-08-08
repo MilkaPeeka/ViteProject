@@ -38,7 +38,7 @@ const DashboardView = () => {
     const worstRekemInGdudData = {
         barColor: 'error',
         barValueArray: toBarValueArray(worstRekem.valid, worstRekem.invalid),
-        HeaderMainTitle: "מקט שדורש טיפול מיידי",
+        HeaderMainTitle: "מקט הדורש טיפול מיידי",
         HeaderSubTitle: worstRekem.makat,
         CardMainTitle: (100 * worstRekem.valid / (worstRekem.valid + worstRekem.invalid)).toFixed(0) + "%",
         CardSubTitle: "תקינות"
@@ -47,7 +47,7 @@ const DashboardView = () => {
     const bestRekemInGdudData = {
         barColor: 'success',
         barValueArray: toBarValueArray(bestRekem.valid, bestRekem.invalid),
-        HeaderMainTitle: "מקט במצב תחזוקה מעולה",
+        HeaderMainTitle: "המקט המתוחזק ביותר",
         HeaderSubTitle: bestRekem.makat,
         CardMainTitle: (100 * bestRekem.valid / (bestRekem.valid + bestRekem.invalid)).toFixed(0) + "%",
         CardSubTitle: "תקינות"
@@ -63,7 +63,6 @@ const DashboardView = () => {
         height: '95vh',
     };
     return (
-        
         <Box sx={boxSX}>
             <StatusCard {...statusInGdudData} sx={{gridColumn: 'span 2', gridRow: 'span 2'}}/>
             <StatusCard {...bestRekemInGdudData} sx={{gridColumn: 'span 2', gridRow: 'span 2'}}/>

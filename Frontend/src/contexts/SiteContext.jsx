@@ -89,7 +89,10 @@ const SiteContextProvider = (props) => {
         }
     console.log("initial site load - loaded rekemList")
     getSummarizedRekemsOfUser()
-    .then((result) => dispatch({type: mappings.setSummarizedRekemList, value:result}))
+    .then((result) => {
+        result.sort((a,b) => a.makat.localeCompare(b.makat));
+        dispatch({type: mappings.setSummarizedRekemList, value:result})
+    })
     .catch((err) => console.log(err));
     }, [state.sessionData.isLoggedIn]);
     /*
@@ -148,6 +151,8 @@ const SiteContextProvider = (props) => {
         const result = await getSummarizedRekemsOfUser();
         if (result.error)
             throw new Error(result.error_message);
+
+        result.sort((a,b) => a.makat.localeCompare(b.makat));
             
         dispatch({type: mappings.setSummarizedRekemList, value:result});
     };

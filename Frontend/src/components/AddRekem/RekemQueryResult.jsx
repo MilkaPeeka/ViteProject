@@ -18,6 +18,7 @@ props = {
 
 import { Box, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import { useEffect } from "react";
+import DisplayCard from "../DisplayCard";
 const RekemQueryResult = (props) => {
     useEffect(() => {
         if (!props.isLoading && props.errorMessage === ''){
@@ -87,9 +88,9 @@ const RekemQueryResult = (props) => {
     
 
     return (
-        <Box sx={boxSX}>
+        <DisplayCard sx={boxSX}>
             {displayData}
-        </Box>
+        </DisplayCard>
     );
 
 };

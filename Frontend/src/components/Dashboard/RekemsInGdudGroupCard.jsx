@@ -48,7 +48,7 @@ const RekemsInGdudGroupCard = (props) => {
     const RekemGroupSX = {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         height: '100%',
         ...props.sx
     };

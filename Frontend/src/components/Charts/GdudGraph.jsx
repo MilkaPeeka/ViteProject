@@ -58,7 +58,14 @@ const GdudGraph = (props) => {
       animations: false, 
       // parsing: false,
       plugins: 
-        {legend: {display: false}}};
+        {legend: {display: false}},
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        },
+      }
+    };
     return <Bar redraw={true} data={data} options={options}/>;
 
 };

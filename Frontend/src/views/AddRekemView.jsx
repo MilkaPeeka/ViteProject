@@ -5,6 +5,7 @@ import {SiteContext} from "../contexts/SiteContext"
 import { Box } from "@mui/material";
 import mappings from "../mappings";
 import { useNavigate } from "react-router-dom/dist";
+import DisplayCard from "../components/DisplayCard";
 
 const AddRekemView = () => {    
     const ctx = useContext(SiteContext);

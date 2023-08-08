@@ -1,5 +1,6 @@
-import { Box, Typography, Card, FormGroup, TextField, Button, FormLabel, CircularProgress } from "@mui/material";
+import { Typography, Card, FormGroup, TextField, Button, FormLabel, CircularProgress } from "@mui/material";
 import { useForm } from "react-hook-form";
+import DisplayCard from "./DisplayCard";
 
 /*
 props: 
@@ -38,7 +39,7 @@ const SignInForm = (props) => {
 
     const buttonSX = {borderRadius: 3, marginTop: 4, padding: 1.5, width: "20%"};
     return (
-        <Box sx={boxSX}>
+        <DisplayCard sx={boxSX}>
             <Card component='form' onSubmit={handleSubmit(props.onSubmitHandler)} sx={cardSX}>
                 <Typography variant="h5" mt={3}>הכנס מספר אישי</Typography>
                 <FormGroup sx={formGroupSX}>
@@ -48,7 +49,7 @@ const SignInForm = (props) => {
                 {props.errorMessage !== '' && <FormLabel error sx={{paddingTop: 1}}>{props.errorMessage}</FormLabel>}
                 {props.isLoading ? <CircularProgress color="primary" /> : <Button variant="contained" type="submit" sx={buttonSX}>התחבר</Button>}
             </Card>
-        </Box>
+        </DisplayCard>
     );
 }
 
