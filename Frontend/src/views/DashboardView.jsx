@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { SiteContext } from "../contexts/SiteContext";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom/";
 import mappings from "../mappings";
-import { Box, LinearProgress, Paper, makeStyles } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import StateInGdudCard from "../components/Dashboard/StateInGdudCard";
 import StateInGdudGraphCard from "../components/Dashboard/StateInGdudGraphCard";
 import RekemsInGdudGroupCard from "../components/Dashboard/RekemsInGdudGroupCard";
 import StateInZahalTableCard from "../components/Dashboard/StateInZahalTableCard";
+import StatusCard from "../components/Dashboard/StatusCard";
+import { countRekemValidAndInvalid, getBestValidInvalidRatioRekem, getWorstValidInvalidRatioRekem } from "../helpers/DashboardHelpers";
 const DashboardView = () => {
     console.log("loaded dashboard");
     const ctx = useContext(SiteContext);
@@ -20,25 +21,11 @@ const DashboardView = () => {
     }, [ctx.sessionData.isLoggedIn]);
 
 
-
-    const boxSX = {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        marginY: 5,
-        marginX: 20
-    };
-
     const RekemCardGroupProps = {
         summarizedRekemList: ctx.summarizedRekemList,
     };
 
 
-
-    const stateInGdudCardProps = {
-        summarizedRekemList: ctx.summarizedRekemList,
-        gdud: ctx.userData.gdud
-    };
 
     const stateInGdudGraphProps = {
         summarizedRekemList: ctx.summarizedRekemList,
@@ -48,10 +35,43 @@ const DashboardView = () => {
         }
     };
 
-    // return (
-    // <Box sx={boxSX}>
-    // </Box>
+
+    const {valid : validsInGdud, invalid: invalidsInGdud} = countRekemValidAndInvalid(ctx.summarizedRekemList);
+    const toBarValueArray = (valid, invalid) => [valid,"תקינים מתוך", invalid];
+
+
+    const worstRekem = getWorstValidInvalidRatioRekem(ctx.summarizedRekemList);
+    const bestRekem = getBestValidInvalidRatioRekem(ctx.summarizedRekemList);
     
+
+    const statusInGdudData = {
+        barColor: 'primary',
+        barValueArray: toBarValueArray(validsInGdud, invalidsInGdud),
+        HeaderMainTitle: "המצב בגדוד",
+        HeaderSubTitle: ctx.userData.gdud,
+        CardMainTitle: (100 * validsInGdud / (validsInGdud + invalidsInGdud)).toFixed(0) + "%",
+        CardSubTitle: "תקינות"
+    };
+
+    const worstRekemInGdudData = {
+        barColor: 'error',
+        barValueArray: toBarValueArray(worstRekem.valid, worstRekem.invalid),
+        HeaderMainTitle: "מקט שדורש טיפול מיידי",
+        HeaderSubTitle: worstRekem.makat,
+        CardMainTitle: (100 * worstRekem.valid / (worstRekem.valid + worstRekem.invalid)).toFixed(0) + "%",
+        CardSubTitle: "תקינות"
+    };
+
+    const bestRekemInGdudData = {
+        barColor: 'success',
+        barValueArray: toBarValueArray(bestRekem.valid, bestRekem.invalid),
+        HeaderMainTitle: "מקט במצב תחזוקה הכי טוב",
+        HeaderSubTitle: bestRekem.makat,
+        CardMainTitle: (100 * bestRekem.valid / (bestRekem.valid + bestRekem.invalid)).toFixed(0) + "%",
+        CardSubTitle: "תקינות"
+    };
+
+
     return (
         
         <Box sx={{
@@ -67,22 +87,22 @@ const DashboardView = () => {
             animation:'Gradient 15s ease infinite',
           }}>
 
-            <StateInGdudCard {...stateInGdudCardProps} sx={{gridColumn: 'span 2', gridRow: 'span 2'}}/>
-
             <Paper sx={{bgcolor: "salmon", gridColumn: 'span 2', gridRow: 'span 2'}}>
-                רקם הכי מוצלח
+                <StatusCard {...worstRekemInGdudData}/>
             </Paper>
             <Paper sx={{bgcolor: "salmon", gridColumn: 'span 2', gridRow: 'span 2'}}>
-                רקם הכי פחות מוצלח
-                <LinearProgress variant="buffer" value={90} />
+                <StatusCard {...bestRekemInGdudData}/>
+            </Paper>
+            <Paper sx={{bgcolor: "salmon", gridColumn: 'span 2', gridRow: 'span 2'}}>
+                <StatusCard {...statusInGdudData}/>
             </Paper>
 
-            <RekemsInGdudGroupCard {...RekemCardGroupProps} sx={{gridColumn: 'span 5', gridRow: 'span 5'}}/>
+            <RekemsInGdudGroupCard {...RekemCardGroupProps} sx={{gridColumn: 'span 5', gridRow: ctx.userData.isManager ? 'span 5' : 'span 10'}}/>
 
             <StateInGdudGraphCard {...stateInGdudGraphProps} sx={{gridColumn: 'span 6', gridRow: 'span 8'}} />
-            <Paper sx={{bgcolor: "salmon", gridColumn: 'span 5', gridRow: 'span 5'}}>
-            {ctx.userData.isManager && <StateInZahalTableCard/>}
-            </Paper>
+            {ctx.userData.isManager && <Paper sx={{bgcolor: "salmon", gridColumn: 'span 5', gridRow: 'span 5'}}>
+             <StateInZahalTableCard/>
+            </Paper> }
         </Box>
     );
 };
