@@ -9,6 +9,7 @@ import {Box, Button, CircularProgress, TextField, Typography} from "@mui/materia
 import RekemTable from "./RekemTable";
 import { useContext, useRef, useState } from "react";
 import { SiteContext } from "../../contexts/SiteContext";
+import DisplayCard from "../DisplayCard";
 
 const StateInZahalTableCard = (props) => {
 
@@ -22,9 +23,6 @@ const StateInZahalTableCard = (props) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        bgcolor: 'background.paper',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
         width: '100%',
     };
 
@@ -33,8 +31,6 @@ const StateInZahalTableCard = (props) => {
         flexDirection: 'column',
         justifyContent: 'start',
         alignItems: 'center',
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
-        borderRadius: 6,
         height: '100%',
         ...props.sx
     };
@@ -49,7 +45,7 @@ const StateInZahalTableCard = (props) => {
 
     const RekemGroupHeader = (
         <Box sx={headerSX}>
-            <Typography sx={{marginTop: 2, marginLeft: 2, color: 'primary.light'}} variant="h5">חיפוש לפי גדוד:</Typography>
+             <Typography sx={{marginTop: 4, marginX: 4, color: 'primary.light'}} variant="h5">חיפוש לפי גדוד:</Typography>
                 <form onSubmit={handleSubmit}>
                     <TextField
                     sx={{m: 2,}}
@@ -67,7 +63,7 @@ const StateInZahalTableCard = (props) => {
     const isEmptyQuery = searchRef.current.value !== '' && queryRekemList.length === 0;
 
     return (
-        <Box sx={boxSX}>
+        <DisplayCard sx={boxSX}>
             {RekemGroupHeader}
             {isLoading ? <CircularProgress color="primary" /> 
             :
@@ -79,7 +75,7 @@ const StateInZahalTableCard = (props) => {
             :
             <RekemTable gdud={searchRef.current.value} rekemList = {queryRekemList} sx={{borderBottomLeftRadius: 30, borderBottomRightRadius: 30, width: '100%'}} />
             }
-        </Box>
+        </DisplayCard>
     );
     
 };

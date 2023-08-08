@@ -1,4 +1,5 @@
 import { Box, Divider, LinearProgress, Typography } from "@mui/material";
+import DisplayCard from "../DisplayCard";
 
 /*
 props: {
@@ -71,14 +72,14 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
 
 
     return (
-        <Box sx={boxSX}>
+        <DisplayCard sx={boxSX}>
             <Box sx={mainCardDataSX}>
                 <CardHeader mainHeader = {HeaderMainTitle} subHeader = {HeaderSubTitle}/>
                 <CardData mainHeader = {CardMainTitle} subHeader = {CardSubTitle} />
             </Box>
             <Divider/>
             <CardProgressBar color={barColor} valueArray={barValueArray}/>
-        </Box>
+        </DisplayCard>
     );
 };
 

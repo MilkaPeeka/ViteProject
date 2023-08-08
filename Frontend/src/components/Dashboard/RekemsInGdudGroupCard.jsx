@@ -8,6 +8,7 @@ props= {
 import { Box, TextField, Typography } from "@mui/material";
 import RekemCard from "./RekemCard";
 import { useState } from "react";
+import DisplayCard from "../DisplayCard";
 
 const RekemsInGdudGroupCard = (props) => {
     const summarizedRekemList = props.summarizedRekemList;
@@ -36,27 +37,18 @@ const RekemsInGdudGroupCard = (props) => {
         overflowY: 'scroll',
         overflowX: 'hidden',
         '&::-webkit-scrollbar': { display: 'none' },
-        borderBottomLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        bgcolor: 'background.paper',
-    };
+        };
 
     const headerSX = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        bgcolor: 'background.paper',
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40
-
     };
     
     const RekemGroupSX = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
-        borderRadius: 10,
         height: '100%',
         ...props.sx
     };
@@ -85,10 +77,10 @@ const RekemsInGdudGroupCard = (props) => {
     );
 
     return (
-    <Box sx={RekemGroupSX}>
+    <DisplayCard sx={RekemGroupSX}>
         {RekemGroupHeader}
         {ScrollableRekemList}
-    </Box>
+    </DisplayCard>
     );
 
 };
