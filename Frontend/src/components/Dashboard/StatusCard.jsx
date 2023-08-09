@@ -1,5 +1,5 @@
 import { Box, Divider, LinearProgress, Typography } from "@mui/material";
-import DisplayCard from "../DisplayCard";
+import DisplayCard from "../UI/DisplayCard";
 
 /*
 props: {

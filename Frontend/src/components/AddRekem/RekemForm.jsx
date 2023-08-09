@@ -21,7 +21,7 @@ props = {
 import { useForm } from "react-hook-form";
 import { Card, FormGroup, FormLabel, TextField, Checkbox, Button, FormControlLabel, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import DisplayCard from "../DisplayCard";
+import DisplayCard from "../UI/DisplayCard";
 
 const RekemForm = (props) => {
     const [successful, setSuccessful] = useState(false);

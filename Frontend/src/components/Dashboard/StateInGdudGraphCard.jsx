@@ -6,8 +6,8 @@ props: {
 */
 
 import { transformRekemDataToPercentages } from "../../helpers/DashboardHelpers";
-import GdudGraph from "../Charts/GdudGraph";
-import DisplayCard from "../DisplayCard";
+import GdudGraph from "../Datastructures/GdudGraph";
+import DisplayCard from "../UI/DisplayCard";
 const StateInGdudGraphCard = (props) => {
     const data = transformRekemDataToPercentages(props.summarizedRekemList);
     const boxSX = {

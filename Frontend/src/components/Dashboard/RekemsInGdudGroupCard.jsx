@@ -8,7 +8,7 @@ props= {
 import { Box, TextField, Typography } from "@mui/material";
 import RekemCard from "./RekemCard";
 import { useState } from "react";
-import DisplayCard from "../DisplayCard";
+import DisplayCard from "../UI/DisplayCard";
 
 const RekemsInGdudGroupCard = (props) => {
     const summarizedRekemList = props.summarizedRekemList;

@@ -10,7 +10,7 @@ props = {
 */
 
 import { Typography, Box } from "@mui/material";
-import RekemDoughnut from "../Charts/RekemDoughnut";
+import RekemDoughnut from "../Datastructures/RekemDoughnut";
 
 const RekemCard = (props) => {
     const boxSX = {

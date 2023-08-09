@@ -18,7 +18,7 @@ props = {
 
 import { Box, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import { useEffect } from "react";
-import DisplayCard from "../DisplayCard";
+import DisplayCard from "../UI/DisplayCard";
 const RekemQueryResult = (props) => {
     useEffect(() => {
         if (!props.isLoading && props.errorMessage === ''){

@@ -6,10 +6,10 @@ props = {
 }
 */
 import {Box, Button, CircularProgress, TextField, Typography} from "@mui/material"
-import RekemTable from "./RekemTable";
+import RekemTable from "../Datastructures/RekemTable";
 import { useContext, useRef, useState } from "react";
 import { SiteContext } from "../../contexts/SiteContext";
-import DisplayCard from "../DisplayCard";
+import DisplayCard from "../UI/DisplayCard";
 
 const StateInZahalTableCard = (props) => {
 

@@ -9,7 +9,7 @@ import RekemsInGdudGroupCard from "../components/Dashboard/RekemsInGdudGroupCard
 import StateInZahalTableCard from "../components/Dashboard/StateInZahalTableCard";
 import StatusCard from "../components/Dashboard/StatusCard";
 import { countRekemValidAndInvalid, getBestValidInvalidRatioRekem, getWorstValidInvalidRatioRekem } from "../helpers/DashboardHelpers";
-import DisplayCard from "../components/DisplayCard";
+import DisplayCard from "../components/UI/DisplayCard";
 
 const DashboardView = () => {
     const ctx = useContext(SiteContext);

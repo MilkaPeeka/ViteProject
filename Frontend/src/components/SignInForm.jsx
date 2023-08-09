@@ -1,6 +1,6 @@
 import { Typography, Card, FormGroup, TextField, Button, FormLabel, CircularProgress } from "@mui/material";
 import { useForm } from "react-hook-form";
-import DisplayCard from "./DisplayCard";
+import DisplayCard from "./UI/DisplayCard";
 
 /*
 props: 
