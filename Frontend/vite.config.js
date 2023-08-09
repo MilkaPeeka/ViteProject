@@ -1,19 +1,31 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    watch: {
-      usePolling: true,
-    },
-    proxy: {
-      '/api': `http://${process.env.onDocker? 'backend' : '0.0.0.0'}:3001/`
-    },
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import dotenv from 'dotenv';
 
-    host: true,
-    strictPort: true,
-    port: 9005
-  }
-  
-})
+export default defineConfig(({ mode }) => {
+    const envFile = mode === 'development' ? '.env.development' : '.env.production';
+    dotenv.config({ path: envFile });
+    console.log(mode);
+    return {
+        plugins: [react()],
+        build: {
+            outDir: 'build',
+            assetsDir: 'assets',
+            emptyOutDir: true,
+        },
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, './src'),
+            },
+        },
+        server: {
+            proxy: {
+                '/api': {
+                    target: process.env.VITE_API_BASE_URL,
+                    changeOrigin: true,
+                },
+            },
+        },
+    };
+});
