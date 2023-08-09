@@ -1,23 +1,23 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-
+const mappings = require('../mappings.cjs');
   
   // POST /api/login - User login
   router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
-        return res.json({ error: true, error_message: 'Internal server error ' + err.message });
+        return res.json({ error: true, error_message: mappings.SERVER_ERROR(err.message)});
       }
       if (!user) {
-        return res.json({ error: true, error_message: 'משתמש הכניס מזהה לא נכון' });
+        return res.json({ error: true, error_message: mappings.INVALID_CREDENTIALS });
       }
       req.logIn(user, (err) => {
         if (err) {
-          return res.json({ error_message: 'Login failed' });
+          return res.json({ error: true, error_message: mappings.SERVER_ERROR(err.message)});
         }
   
-        return res.json({ error: false, message: 'Login successful', user, sessionExpiry: new Date(new Date().getTime() + 24 * 60 * 60 * 1000) });
+        return res.json({ error: false, message: mappings.SUCCESSFULL_SIGN_IN, user, sessionExpiry: new Date(new Date().getTime() + 24 * 60 * 60 * 1000) });
       });
     })(req, res, next);
   });
@@ -36,19 +36,18 @@ const router = express.Router();
     // Call req.logout() to log out the current user
     req.logout((err) => {
       if (err) {
-        return res.json({ error: true, error_message: "Logout failed " + err.message });
+        return res.json({ error: true, error_message: mappings.LOGOUT_ERROR(err.message) });
       }
   
       // Destroy the session on the server-side
       req.session.destroy((err) => {
         if (err) {
-          return res.json({ error: true, error_message: "Logout failed " + err.message });
+          return res.json({ error: true, error_message: mappings.LOGOUT_ERROR(err.message) });
         }
   
         // Clear the session cookie on the client-side
         res.clearCookie('connect.sid');
-  
-        return res.json({ error: false, result: "Logout success!" });
+        return res.json({ error: false, result: mappings.SUCCESSFULL_LOG_OUT });
       });
     });
   });

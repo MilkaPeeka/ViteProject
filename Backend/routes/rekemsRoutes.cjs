@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {authenticateMiddleware, managerMiddlewate} = require('../middlewares/authMiddleware.cjs');
+const {authenticateMiddleware, managerMiddleware} = require('../middlewares/authMiddleware.cjs');
 const carData = require('../models/carData.cjs'); // Assuming you have the carData model defined in models/carData.js
-
+const mappings = require('../mappings.cjs');
 // GET /api/rekems/get_of_user - Get carData based on user's gdud
 router.get('/get_of_user', authenticateMiddleware, async (req, res) => {
   try {
@@ -20,7 +20,7 @@ router.get('/get_of_user', authenticateMiddleware, async (req, res) => {
     });
   
   } catch (error) {
-    res.json({ error: true, error_msg: error.message });
+    res.json({ error: true, error_message: error.message });
   }
 });
 
@@ -61,7 +61,7 @@ router.get('/get_summarized_of_user',authenticateMiddleware, async(req, res) => 
   }
 
   catch (error) {
-    res.json({ error: true, error_msg: error.message });
+    res.json({ error: true, error_message: error.message });
 
   }
 
@@ -70,7 +70,7 @@ router.get('/get_summarized_of_user',authenticateMiddleware, async(req, res) => 
 
 
 // GET /api/rekems/get_by_gdud/:gdud - Get carData based on provided gdud
-router.get('/get_by_gdud/:gdud', authenticateMiddleware, managerMiddlewate, async (req, res) => {
+router.get('/get_by_gdud/:gdud', authenticateMiddleware, managerMiddleware, async (req, res) => {
   try {
     const queryResult = await carData.find({
       gdud: req.params.gdud,
@@ -86,26 +86,22 @@ router.get('/get_by_gdud/:gdud', authenticateMiddleware, managerMiddlewate, asyn
     });
   
   } catch (error) {
-    res.json({ error: true, error_msg: error.message });
+    res.json({ error: true, error_message: error.message });
   }
 });
 
 // POST /api/rekems/add - Add a new rekem (carData) - Requires authentication for manager role
-router.post('/add', authenticateMiddleware, async (req, res) => {
-  if (!req.user.isManager) {
-    res.json({ error: true, error_message: 'Unauthorized to add new rakams' });
-    return;
-  }
-
+router.post('/add', authenticateMiddleware, managerMiddleware, async (req, res) => {
   const { carNumber, makat, kshirot } = req.body;
 
   if (!carNumber || !makat || kshirot === undefined) {
-    res.json({ error: true, error_message: 'One or more fields are invalid' });
+    res.json({ error: true, error_message: mappings.INVALID_FIELDS });
   } else {
     const newlyAdded = new carData({
       carNumber,
       makat,
       kshirot,
+      gdud: req.user.gdud,
     });
 
     try {
