@@ -11,7 +11,7 @@ import { Paper } from "@mui/material";
 const DisplayCard = (props) => {
     const paperSX = {
         borderRadius: 7,
-        boxShadow: 7,
+        boxShadow: 4,
         ...props.sx
     };
     return (

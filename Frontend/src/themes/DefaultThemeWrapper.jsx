@@ -28,7 +28,8 @@ const DefaultThemeWrapper = (props) => {
                           main: '#1d7c63',
                         },
                         secondary: {
-                          main: '#8728a9',
+                          main: '#ffb3c6',
+                          light: '#BE939C'
                         },
                         error: {
                           main: '#db3636'
@@ -38,11 +39,11 @@ const DefaultThemeWrapper = (props) => {
                           light: '#66c96d',
                         },
                         background: {
-                          default: '#fffbf0',
-                          paper: '#F8F5F2',
+                          default: '#f7f0e9',
+                          paper: '#eae0d5',
                         },
                         text: {
-                          default: '#322601'
+                          primary: '#322601'
                         }
                       }
                     : {
@@ -51,11 +52,15 @@ const DefaultThemeWrapper = (props) => {
                           main: '#ffe57f',
                         },
                         secondary: {
-                          main: '#f50057',
+                          main: '#ffb8cd',
+                          light: '#F2C4D7'
                         },
                         background: {
                           paper: '#1a1a1a',
                         },
+                        text: {
+                          primary: '#ded8da'
+                        }
                       }),
                 },
 

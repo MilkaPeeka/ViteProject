@@ -43,12 +43,13 @@ const RekemsInGdudGroupCard = (props) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        
     };
     
     const RekemGroupSX = {
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
+        // justifyContent: 'center
         height: '100%',
         ...props.sx
     };
@@ -63,15 +64,13 @@ const RekemsInGdudGroupCard = (props) => {
 
     const RekemGroupHeader = (
         <Box sx={headerSX}>
-            <Typography sx={{marginTop: 4, marginX: 4, color: 'primary.light'}} variant="h5">חיפוש כלי בגדוד:</Typography>
+            <Typography sx={{marginTop: 4, marginX: 4, color: 'secondary.light'}} variant="h5">חיפוש כלי בגדוד:</Typography>
             <TextField
                 sx={{m: 2}}
                 label="חיפוש לפי מקט"
                 variant="standard"
                 onChange={onChangeHandler}
-                InputLabelProps={{sx: {color: 'primary.light'}}}
-
-
+                InputLabelProps={{sx: {color: 'secondary.light'}}}
             />
         </Box>
     );

@@ -45,15 +45,15 @@ const StateInZahalTableCard = (props) => {
 
     const RekemGroupHeader = (
         <Box sx={headerSX}>
-             <Typography sx={{marginTop: 4, marginX: 4, color: 'primary.light'}} variant="h5">חיפוש לפי גדוד:</Typography>
+             <Typography sx={{marginTop: 4, marginX: 4, color: 'secondary.light'}} variant="h5">חיפוש לפי גדוד:</Typography>
                 <form onSubmit={handleSubmit}>
                     <TextField
                     sx={{m: 2,}}
                     label="חיפוש לפי גדוד"
                     variant="standard"
-                    InputLabelProps={{sx: {color: 'primary.light'}}}
+                    InputLabelProps={{sx: {color: 'secondary.light'}}}
                     inputRef={searchRef}/>
-                    <Button type="submit" sx={{marginTop: 4}}>חפש</Button>
+                    <Button type="submit" color="primary" sx={{marginTop: 4}}>חפש</Button>
                 </form>
         </Box>
     );

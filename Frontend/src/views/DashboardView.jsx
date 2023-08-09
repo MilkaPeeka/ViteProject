@@ -28,7 +28,7 @@ const DashboardView = () => {
     const bestRekem = getBestValidInvalidRatioRekem(ctx.summarizedRekemList);
 
     const statusInGdudData = {
-        barColor: 'primary',
+        barColor: 'secondary',
         barValueArray: toBarValueArray(validsInGdud, invalidsInGdud),
         HeaderMainTitle: "המצב בגדוד",
         HeaderSubTitle: ctx.userData.gdud,
@@ -89,7 +89,7 @@ const DashboardView = () => {
                     padding: 2,
                     paddingBottom: 0
                 }}>
-                <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{height: '55%', mb: 2}}/>
+                <RekemsInGdudGroupCard summarizedRekemList = {ctx.summarizedRekemList} sx={{height: ctx.userData.isManager ? '55%' : '100%', mb: 2}}/>
                 {ctx.userData.isManager && <StateInZahalTableCard sx={{height: '45%'}} />}
                 </Box>
             </Grid>
