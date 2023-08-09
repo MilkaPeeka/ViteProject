@@ -4,10 +4,9 @@ const bp = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const cors = require('cors');
 const app = express();
-
 const passport = require('./config/passport-config.cjs');
-
 
 const store = new MongoDBStore({
   uri: process.env.REMOTE_DB,
@@ -16,6 +15,7 @@ const store = new MongoDBStore({
 
 app.use(bp.urlencoded({ extended: true }));
 app.use(bp.json({ extended: true }));
+app.use(cors());
 
 app.use(session({
   secret: process.env.SESS_SECRET,
