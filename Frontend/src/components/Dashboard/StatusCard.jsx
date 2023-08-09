@@ -41,7 +41,7 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
     const CardHeader = ({mainHeader, subHeader}) => {
         return (
         <Box>
-            <Typography color="text.secondary" variant="body1" >{mainHeader}</Typography>
+            <Typography variant="body1" >{mainHeader}</Typography>
             <Typography fontWeight="bold" variant="h5">{subHeader}</Typography>
         </Box>
         );
@@ -51,7 +51,7 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
         return (
             <Box sx={cardDataSX}>
                 <Typography fontWeight="bold" variant="body1">{mainHeader}</Typography>
-                <Typography fontWeight="medium" variant="body2" color="text.secondary">{subHeader}</Typography>
+                <Typography fontWeight="medium" variant="body2">{subHeader}</Typography>
             </Box>
         );
     };
@@ -61,9 +61,9 @@ const StatusCard = ({barColor, barValueArray, sx, HeaderMainTitle, HeaderSubTitl
             <Box>
                 <LinearProgress variant="determinate" color={color} sx={{height: 9, borderRadius: 10}} value={100 * (+valueArray[0] / +valueArray[2])}/>
                 <Box sx={{display: 'flex', flexDirection: 'row', gap: 0.5}}>
-                    <Typography color="text.secondary" variant="subtitle2" fontWeight='bold'>{valueArray[0]}</Typography>
-                    <Typography color="text.secondary" variant="subtitle2" fontWeight='medium'>{valueArray[1]}</Typography>
-                    <Typography color="text.secondary" variant="subtitle2" fontWeight='bold'>{valueArray[2]}</Typography>
+                    <Typography variant="subtitle2" fontWeight='bold'>{valueArray[0]}</Typography>
+                    <Typography variant="subtitle2" fontWeight='medium'>{valueArray[1]}</Typography>
+                    <Typography variant="subtitle2" fontWeight='bold'>{valueArray[2]}</Typography>
                 </Box>
             </Box>
         );

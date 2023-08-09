@@ -16,21 +16,34 @@ const DefaultThemeWrapper = (props) => {
         const ctx = useContext(SiteContext);
         const theme = createTheme({
             direction: 'rtl',
+            typography: {
+              fontFamily: 'Rubik'
+            },
             palette: {
                 mode: ctx.isInDarkMode ? 'dark' : 'light',
                   ...(!ctx.isInDarkMode
                     ? {
                         // palette values for light mode
                         primary: {
-                          main: '#4527a0',
+                          main: '#1d7c63',
                         },
                         secondary: {
-                          main: '#f50057',
+                          main: '#8728a9',
+                        },
+                        error: {
+                          main: '#db3636'
                         },
                         success: {
                           main: '#2b9c32',
                           light: '#66c96d',
                         },
+                        background: {
+                          default: '#fffbf0',
+                          paper: '#F8F5F2',
+                        },
+                        text: {
+                          default: '#322601'
+                        }
                       }
                     : {
                         // palette values for dark mode

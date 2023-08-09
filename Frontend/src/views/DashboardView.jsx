@@ -66,7 +66,7 @@ const DashboardView = () => {
                 }}>
                     <Grid item container sx={{height: '20%'}} mb={3}>
                         <Grid item xs={4}>
-                            <StatusCard {...statusInGdudData} sx={{margin: 1}}/>
+                            <StatusCard {...statusInGdudData} sx={{margin: 1, bgcolor: 'secondary.dark', color: 'background.paper'}}/>
                         </Grid>
 
                         <Grid item xs={4}>

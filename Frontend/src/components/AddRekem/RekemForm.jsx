@@ -51,8 +51,6 @@ const RekemForm = (props) => {
         flex: 1,
         flexDirection: 'column',
         padding: 2,
-        borderRadius: 6,
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
     };
 
     const isCheckboxConfirmationNeeded = props.isRekemFound ? false : !props.newRekemConfirmed;

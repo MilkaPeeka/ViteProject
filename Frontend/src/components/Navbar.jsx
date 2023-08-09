@@ -28,7 +28,7 @@ const Navbar = () => {
     const rightButtonsSX = {
         color: ctx.isInDarkMode? "primary.light" : 'white',
         "&.active": {
-            color: "primary",
+            color: "secondary",
             backgroundColor: ctx.isInDarkMode? "background.paper" : 'primary.light'
         }
     };
