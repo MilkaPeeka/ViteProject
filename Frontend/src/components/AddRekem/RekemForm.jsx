@@ -78,8 +78,8 @@ const RekemForm = (props) => {
                     <FormControlLabel control={<Checkbox {...register("isRekemValid")} checked={watch('isRekemValid')}/>} label="הכלי כשיר" />
                 </FormGroup>
                 {props.errorMessage !== '' && <FormLabel error sx={{paddingTop: 1}}>{props.errorMessage}</FormLabel>}
-                {successful && <FormLabel sx={{paddingTop: 1, color:"success.light"}}>רקמ נוסף למערכת בהצלחה!</FormLabel>}
                 {props.isLoading ? <CircularProgress color="primary" /> : <Button variant="contained" type="submit" disabled={isCheckboxConfirmationNeeded}>הוסף רקמ למערכת!</Button>}
+                {successful && <FormLabel sx={{padding: 3, color:"success.light"}}>רקמ נוסף למערכת בהצלחה!</FormLabel>}
             </form> 
         </DisplayCard>
         );

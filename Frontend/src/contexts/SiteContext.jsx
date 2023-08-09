@@ -130,7 +130,7 @@ const SiteContextProvider = (props) => {
             throw new Error(result.error_message);
 
 
-        dispatch({type: mappings.setRekemList, value: []});
+        dispatch({type: mappings.setSummarizedRekemList, value: []});
         dispatch({type: mappings.setUserData, value: defaultUserData});
         dispatch({type: mappings.setSessionData, value: defaultSessionData});
         localStorage.removeItem(mappings.sessionData);
