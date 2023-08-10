@@ -19,12 +19,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vite-project-backend-srv
+  name: vite-project-backend
 spec:
   type: LoadBalancer
   selector: 
     app: vite-project-backend
   ports:
-    - name: backendPort
-      port: 3001
-      targetPort: 3001
+  - port: 3001
