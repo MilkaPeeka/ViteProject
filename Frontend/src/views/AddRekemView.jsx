@@ -25,6 +25,11 @@ const AddRekemView = () => {
         // console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
     }, [ctx.sessionData.isLoggedIn]);
 
+    useEffect(() => {
+        if (!ctx.userData.isManager)
+            return navigate(mappings.dashboardPath);
+        // console.log("useEffect Ran. it is normal to run twice with <React.StrictMode> ")
+    }, [ctx.userData.isManager]);
 
     const submitHandler = (rekemData) => {
         console.log(rekemData);
