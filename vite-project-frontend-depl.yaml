@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vite-project-frontend-depl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vite-project-frontend
+  template:
+    metadata:
+      labels:
+        app: vite-project-frontend
+    spec:
+      containers:
+        - name: vite-project-frontend
+          image: yuvalhad1220/vite-project-frontend:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vite-project-frontend-srv
+spec:
+  type: LoadBalancer
+  selector: 
+    app: vite-project-frontend
+  ports:
+    - name: frontendPort
+      port: 8080
+      targetPort: 8080

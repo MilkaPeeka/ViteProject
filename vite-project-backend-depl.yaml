@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vite-project-backend-depl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vite-project-backend
+  template:
+    metadata:
+      labels:
+        app: vite-project-backend
+    spec:
+      containers:
+        - name: vite-project-backend
+          image: yuvalhad1220/vite-project-backend:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vite-project-backend-srv
+spec:
+  type: LoadBalancer
+  selector: 
+    app: vite-project-backend
+  ports:
+    - name: backendPort
+      port: 3001
+      targetPort: 3001

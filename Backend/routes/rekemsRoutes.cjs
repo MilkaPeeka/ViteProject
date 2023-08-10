@@ -62,11 +62,8 @@ router.get('/get_summarized_of_user',authenticateMiddleware, async(req, res) => 
 
   catch (error) {
     res.json({ error: true, error_message: error.message });
-
   }
-
 });
-
 
 
 // GET /api/rekems/get_by_gdud/:gdud - Get carData based on provided gdud
