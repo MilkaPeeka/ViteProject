@@ -2,16 +2,16 @@
 
 version: '3'
 services:
-  frontend:
+  vite-project-frontend:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"  # Map host port to frontend container port
     depends_on:
-      - backend
+      - vite-project-backend
 
-  backend:
+  vite-project-backend:
     build:
       context: ./Backend
       dockerfile: Dockerfile

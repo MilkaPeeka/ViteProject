@@ -110,4 +110,22 @@ router.post('/add', authenticateMiddleware, managerMiddleware, async (req, res) 
   }
 });
 
+router.delete('/remove_by_car_number/:carNumber', authenticateMiddleware, managerMiddleware, async (req, res) => {
+  const carNumber = req.params.carNumber;
+  try {
+    const result = await carData.findOneAndRemove({carNumber});
+    res.json({
+      error: false,
+      results: result
+    });
+}
+
+catch (err) {
+  res.json({
+      error: true,
+      error_message: err.message
+  });
+}
+});
+
 module.exports = router;

@@ -85,7 +85,7 @@ export const getSummarizedRekemsOfUser = async() => {
 */
 export const getRekemsByGdud = async (gdud) => {
     try {
-        const response = await axios.get(mappings.API_get_rekems_by_gdud + gdud, {withCredentials: true});
+        const response = await axios.get(mappings.API_get_rekems_by_gdud(gdud), {withCredentials: true});
         return response.data.results;
     }
     catch (err) {
@@ -112,5 +112,24 @@ export const addRekemToGdud = async (rekemData) => {
             error: true,
             error_message: err.message
         };
+    }
+};
+
+
+/*
+    Removes by carNumber from database
+*/
+
+export const removeByCarNumber = async (carNumber) => {
+    try {
+        const response = await axios.delete(mappings.API_delete_rekem(carNumber), {withCredentials: true})
+        return response.data;
+    }
+
+    catch (err) {
+        return {
+            error: true,
+            error_message: err.message
+        }
     }
 };

@@ -1,6 +1,7 @@
 /*
 props: {
     rekemList,
+    onDeleteClick
     gdud
     sx
 }
@@ -13,7 +14,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button, CircularProgress, Snackbar } from "@mui/material";
   
 
 const RekemTable = (props) => {
@@ -42,21 +43,29 @@ const RekemTable = (props) => {
         ...props.sx
     };
 
+
+    const tableBodyRow = (item) => {
+      const [isLoading, setIsLoading] = useState(false);
+      const deleteButton = <Button color="error" variant="contained" onClick={() => props.onDeleteClick(item.carNumber, setIsLoading)}>מחק</Button>;
+      return (
+          <TableRow
+          key={item.carNumber}
+          sx={{
+            "&:last-child td, &:last-child th": { border: 0 },
+          }}>
+          <TableCell>{props.gdud}</TableCell>
+          <TableCell>{item.makat}</TableCell>
+          <TableCell>{item.carNumber}</TableCell>
+          <TableCell>{item.kshirot ? 'תקין' : 'תקול'}</TableCell>
+          <TableCell>{isLoading ? <CircularProgress color="error" />: deleteButton}</TableCell>
+        </TableRow>
+
+      );
+    }
+
     const TableBodyData = (
         <TableBody>
-        {props.rekemList.slice(pg * rpg, pg * rpg + rpg).map((item) => (
-          <TableRow
-            key={item.carNumber}
-            sx={{
-              "&:last-child td, &:last-child th": { border: 0 },
-            }}
-          >
-            <TableCell>{props.gdud}</TableCell>
-            <TableCell>{item.makat}</TableCell>
-            <TableCell>{item.carNumber}</TableCell>
-            <TableCell>{item.kshirot ? 'תקין' : 'תקול'}</TableCell>
-          </TableRow>
-        ))}
+        {props.rekemList.slice(pg * rpg, pg * rpg + rpg).map((item) => tableBodyRow(item))}
       </TableBody>
     );
 
@@ -67,6 +76,7 @@ const RekemTable = (props) => {
           <TableHeaderText value="מקט"/>
           <TableHeaderText value="מספר סידורי"/>
           <TableHeaderText value="כשירות"/>
+          <TableHeaderText value="הסר"/>
         </TableRow>
       </TableHead>
     );

@@ -1,4 +1,4 @@
-import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud, getSummarizedRekemsOfUser} from '../api/database';
+import {userLogIn, userLogOut, getRekemsByGdud, addRekemToGdud, getSummarizedRekemsOfUser, removeByCarNumber as DBremoveByCarNumber} from '../api/database';
 import { createContext, useEffect, useReducer } from 'react';
 import {retrieveContextDataFromStorage} from '../helpers/contextHelpers'
 import mappings from '../mappings';
@@ -73,7 +73,8 @@ export const SiteContext = createContext({
     onLogInHandler: async (pernum) => {},
     addRekemHandler: async (rekemData) => {}, 
     getSummarizedRekemList: async () => {},
-    getRekemListByGdud: async (gdud) => {}
+    getRekemListByGdud: async (gdud) => {},
+    removeByCarNumber: async (carNumber) => {}
 });
 
 
@@ -148,6 +149,7 @@ const SiteContextProvider = (props) => {
     };
     
     const getSummarizedRekemList = async () => {
+        console.log("hey");
         const result = await getSummarizedRekemsOfUser();
         if (result.error)
             throw new Error(result.error_message);
@@ -177,6 +179,16 @@ const SiteContextProvider = (props) => {
     };
     
 
+    const removeByCarNumber = async (carNumber) => {
+        console.log("hey");
+        const result = await DBremoveByCarNumber(carNumber);
+        console.log(result);
+        if (result.error)
+            throw new Error(result.error_message);
+
+        await getSummarizedRekemList();
+    }
+
     return (
         <SiteContext.Provider value={{
             ...state,
@@ -185,7 +197,8 @@ const SiteContextProvider = (props) => {
             onLogInHandler,
             addRekemHandler,
             getSummarizedRekemList,
-            getRekemListByGdud
+            getRekemListByGdud,
+            removeByCarNumber
         }}>
             {props.children}
         </SiteContext.Provider>
