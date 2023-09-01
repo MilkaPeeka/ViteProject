@@ -57,7 +57,11 @@ const RekemsInGdudGroupCard = (props) => {
     const ScrollableRekemList = (
         <Box sx={scrollableBoxSX}>
             {filteredRekems.map((item) =>
-            <RekemCard {...rekemCardStyleProps} makat={item.makat} key={item.makat} valid={item.valid} invalid={item.invalid}/>)}
+            <CSSTransition
+            
+            >
+                <RekemCard {...rekemCardStyleProps} makat={item.makat} key={item.makat} valid={item.valid} invalid={item.invalid}/>
+            </CSSTransition>)}
         </Box>
     );
 
